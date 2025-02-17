@@ -226,6 +226,7 @@ The Edrys JavaScript client library provides an interface to interact with Edrys
 #### Properties
 
 > Edrys.ready
+
 Boolean indicating if Edrys is initialized.
 
 ```js
@@ -233,6 +234,7 @@ console.log(Edrys.ready); // true or false
 ```
 
 > Edrys.role 
+
 User role within the classroom.
 
 ```js
@@ -240,6 +242,7 @@ console.log(Edrys.role); // "teacher", "student", or "station"
 ```
 
 > Edrys.username
+
 The username of the current user.
 
 ```js
@@ -247,6 +250,7 @@ console.log(Edrys.username); // Current user's username
 ```
 
 > Edrys.module
+
 Users of the module can pass in some run-time configuration to your module to customize its behavior.
 
 ```js
@@ -257,6 +261,7 @@ console.log(Edrys.module.stationConfig); // Only available when this module is l
 ```
 
 > Edrys.liveClass
+
 Reactive object representing the live classroom state.
 
 ```js
@@ -265,6 +270,7 @@ console.log(Edrys.liveClass.rooms); // List of rooms in the classroom
 ```
 
 > Edrys.liveRoom
+
 Reactive object representing the live room state.
 
 ```js
@@ -272,6 +278,7 @@ console.log(Edrys.liveRoom.name); // Room name
 ```
 
 > Edrys.liveUser
+
 Reactive object representing the live user state.
 
 ```js
@@ -283,6 +290,7 @@ console.log(Edrys.liveUser.room); // User's current room
 #### Event Handling
 
 > Edrys.onReady(handler)
+
 Register a handler to be called when Edrys is ready.
 
 ```javascript
@@ -290,6 +298,7 @@ Register a handler to be called when Edrys is ready.
 ``` 
 
 > Edrys.onUpdate(handler)
+
 Register a handler to be called on any real-time state changes.
 
 ```javascript
@@ -301,6 +310,7 @@ Register a handler to be called on any real-time state changes.
 Modules can send and receive messages in real time. Messages are sent to a specific user or to all users in the classroom.
 
 > Edrys.sendMessage(subject, body, user?)
+
 * Sends a message with the given subject and body.
 * user(optional): the user to send the message to.
 
@@ -309,6 +319,7 @@ Modules can send and receive messages in real time. Messages are sent to a speci
 ```
 
 > Edrys.onMessage(handler, promiscuous?)
+
 * Registers a handler for receiving messages.
 * handler({ from, subject, body }): Called when a message is received.
 * promiscuous: If true, listens to all messages; otherwise, only listens to messages for the current module.
@@ -324,6 +335,7 @@ Modules can send and receive messages in real time. Messages are sent to a speci
 Modules can store data locally to persist state across sessions.
 
 > Edrys.setItem(key, value)
+
 Stores a value in local storage, scoped to the current class and user room.
 
 ```javascript
@@ -331,6 +343,7 @@ Stores a value in local storage, scoped to the current class and user room.
 ```
 
 > Edrys.getItem(key)
+
 Retrieves a stored value from local storage.
 
 ```javascript
@@ -342,6 +355,7 @@ Retrieves a stored value from local storage.
 Edrys.js initializes by listening to message events from its parent frame and sets up reactive state management using Yjs.
 
 > Edrys.clearState(key)
+
 Removes a state entry from the current room.
 
 ```javascript
@@ -349,6 +363,7 @@ Removes a state entry from the current room.
 ```
 
 > Edrys.updateState(callback, origin)
+
 Updates the state of the current room.
 
 ```javascript
@@ -358,6 +373,7 @@ Updates the state of the current room.
 ```
 
 > Edrys.getState(key?, type?, value?)
+
 * Retrieves or initializes a state entry.
 * type: Can be one of Map, Array, Text, XmlFragment, XmlText, XmlElement, or Value.
 * If type is Value, an optional value can be provided.
