@@ -21,7 +21,7 @@ Welcome to the Edrys documentation!
   [Gitter community](https://gitter.im/edrys-org/community)
 - 🐞 For bug reports and feature requests, visit the
   [issues tab](https://github.com/edrys-labs/edrys-lite/issues)
-- [![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](todo)
+- [![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://raw.githubusercontent.com/edrys-labs/documentation/refs/heads/main/README.md)
 
 
 ## Contents
@@ -34,11 +34,15 @@ Welcome to the Edrys documentation!
 
 ## Introduction to edrys-Lite
 
-Based on [edrys](https://github.com/edrys-org/edrys/tree/main), edrys-Lite is a lightweight, browser-based implementation designed for remote labs and classrooms. It enables seamless collaboration by allowing users to create and interact with various modules such as textual and graphical editors, terminals, camera streams, and drawing tools. The modular architecture ensures that each module operates as an independent entity, making it configurable and reusable across different educational and experimental contexts.
+Based on [edrys](https://github.com/edrys-org/edrys/tree/main), edrys-Lite is a lightweight, browser-based implementation designed for remote labs and classrooms. 
+It enables seamless collaboration by allowing users to create and interact with various modules such as textual and graphical editors, terminals, camera streams, and drawing tools. 
+The modular architecture ensures that each module operates as an independent entity, making it configurable and reusable across different educational and experimental contexts.
 
 ### Principles and Technologies
 
-edrys-Lite establishes browser-to-browser connections using WebRTC, a real-time communication protocol that enables direct peer-to-peer data exchange. To initiate these connections in some cases, a signaling server is required to help peers discover each other and establish a communication channel. In some network conditions, such as when users are behind strict NATs or firewalls, a TURN server may be necessary to relay traffic and ensure connectivity.
+edrys-Lite establishes browser-to-browser connections using WebRTC, a real-time communication protocol that enables direct peer-to-peer data exchange. 
+To initiate these connections, a signaling server is required to help peers discover each other and establish a communication channel. 
+In some network conditions, such as when users are behind strict NATs or firewalls, a STUN or/and TURN server(s) may be necessary to relay traffic and ensure connectivity.
 
 
 <div style="width: 50%; margin: auto;">
@@ -225,7 +229,7 @@ The Edrys JavaScript client library provides an interface to interact with Edrys
 
 #### Properties
 
-> Edrys.ready
+> **Edrys.ready**
 
 Boolean indicating if Edrys is initialized.
 
@@ -233,7 +237,7 @@ Boolean indicating if Edrys is initialized.
 console.log(Edrys.ready); // true or false
 ```
 
-> Edrys.role 
+> **Edrys.role **
 
 User role within the classroom.
 
@@ -241,7 +245,7 @@ User role within the classroom.
 console.log(Edrys.role); // "teacher", "student", or "station"
 ```
 
-> Edrys.username
+> **Edrys.username**
 
 The username of the current user.
 
@@ -249,7 +253,7 @@ The username of the current user.
 console.log(Edrys.username); // Current user's username
 ```
 
-> Edrys.module
+> **Edrys.module**
 
 Users of the module can pass in some run-time configuration to your module to customize its behavior.
 
@@ -260,7 +264,7 @@ console.log(Edrys.module.teacherConfig); // Only available when this module is l
 console.log(Edrys.module.stationConfig); // Only available when this module is loaded on a station
 ```
 
-> Edrys.liveClass
+> **Edrys.liveClass**
 
 Reactive object representing the live classroom state.
 
@@ -269,7 +273,7 @@ console.log(Edrys.liveClass.users); // List of users in the classroom
 console.log(Edrys.liveClass.rooms); // List of rooms in the classroom
 ```
 
-> Edrys.liveRoom
+> **Edrys.liveRoom**
 
 Reactive object representing the live room state.
 
@@ -277,7 +281,7 @@ Reactive object representing the live room state.
 console.log(Edrys.liveRoom.name); // Room name
 ```
 
-> Edrys.liveUser
+> **Edrys.liveUser**
 
 Reactive object representing the live user state.
 
@@ -289,7 +293,7 @@ console.log(Edrys.liveUser.room); // User's current room
 
 #### Event Handling
 
-> Edrys.onReady(handler)
+> **Edrys.onReady(handler)**
 
 Register a handler to be called when Edrys is ready.
 
@@ -297,7 +301,7 @@ Register a handler to be called when Edrys is ready.
   Edrys.onReady(() => console.log("Module is loaded!"));
 ``` 
 
-> Edrys.onUpdate(handler)
+> **Edrys.onUpdate(handler)**
 
 Register a handler to be called on any real-time state changes.
 
@@ -309,7 +313,7 @@ Register a handler to be called on any real-time state changes.
 
 Modules can send and receive messages in real time. Messages are sent to a specific user or to all users in the classroom.
 
-> Edrys.sendMessage(subject, body, user?)
+> **Edrys.sendMessage(subject, body, user?)**
 
 * Sends a message with the given subject and body.
 * user(optional): the user to send the message to.
@@ -318,7 +322,7 @@ Modules can send and receive messages in real time. Messages are sent to a speci
   Edrys.sendMessage("subject", "body");
 ```
 
-> Edrys.onMessage(handler, promiscuous?)
+> **Edrys.onMessage(handler, promiscuous?)**
 
 * Registers a handler for receiving messages.
 * handler({ from, subject, body }): Called when a message is received.
@@ -334,7 +338,7 @@ Modules can send and receive messages in real time. Messages are sent to a speci
 
 Modules can store data locally to persist state across sessions.
 
-> Edrys.setItem(key, value)
+> **Edrys.setItem(key, value)**
 
 Stores a value in local storage, scoped to the current class and user room.
 
@@ -342,7 +346,7 @@ Stores a value in local storage, scoped to the current class and user room.
   Edrys.setItem("key", "value");
 ```
 
-> Edrys.getItem(key)
+> **Edrys.getItem(key)**
 
 Retrieves a stored value from local storage.
 
@@ -354,7 +358,7 @@ Retrieves a stored value from local storage.
 
 Edrys.js initializes by listening to message events from its parent frame and sets up reactive state management using Yjs.
 
-> Edrys.clearState(key)
+> **Edrys.clearState(key)**
 
 Removes a state entry from the current room.
 
@@ -362,7 +366,7 @@ Removes a state entry from the current room.
   Edrys.clearState("key");
 ```
 
-> Edrys.updateState(callback, origin)
+> **Edrys.updateState(callback, origin)**
 
 Updates the state of the current room.
 
@@ -372,7 +376,7 @@ Updates the state of the current room.
   });
 ```
 
-> Edrys.getState(key?, type?, value?)
+> **Edrys.getState(key?, type?, value?)**
 
 * Retrieves or initializes a state entry.
 * type: Can be one of Map, Array, Text, XmlFragment, XmlText, XmlElement, or Value.
