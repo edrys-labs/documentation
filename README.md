@@ -237,7 +237,7 @@ Boolean indicating if Edrys is initialized.
 console.log(Edrys.ready); // true or false
 ```
 
-> **Edrys.role **
+> **Edrys.role**
 
 User role within the classroom.
 
