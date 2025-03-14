@@ -21,6 +21,7 @@ Welcome to the edrys-Lite documentation!
     --{{0}}--
 Edrys-Lite provides an intuitive and simplistic way for users to engage with laboratory environments directly from their browser -- nearly no servers required.
 This documentation will guide you through the process of creating and managing interactive classrooms, developing modules, and exploring the various features of edrys-Lite.
+!?[](videos/edrys_01-0.webm)
 
 - 📖 Use the contents below to get started
 - 💬 For questions and discussions, please visit our
@@ -37,6 +38,7 @@ This documentation is divided into three main sections.
 The first will introduce you to edrys-Lite and its core principles and technologies.
 The second will guide you through the process of creating interactive classrooms and labs using edrys-Lite.
 The third section will provide an overview of developing modules for edrys-Lite.
+!?[](videos/edrys_02-0.webm)
 
 1. [Introduction to edrys-Lite](#Introduction-to-edrys-Lite)
 2. [Lab-Creation](#Lab-Creation)
@@ -49,17 +51,20 @@ The third section will provide an overview of developing modules for edrys-Lite.
 Based on [edrys](https://github.com/edrys-org/edrys), edrys-Lite is a lightweight, browser-based implementation designed for remote labs and classrooms.
 It enables seamless collaboration by allowing users to create and interact with various modules such as textual and graphical editors, terminals, camera streams, and drawing tools.
 The modular architecture ensures that each module operates as an independent entity, making it configurable and reusable across different educational and experimental contexts.
+!?[](videos/edrys_03-0.webm)
 
 ### Principles and Technologies
 
     --{{0}}--
 As you will learn later, edrys-Lite employs a modular approach where each module can be interconnected to facilitate interaction and communication among users. The system utilizes a simple publish-subscribe (pub-sub) mechanism to enable real-time message exchange between users, it uses Conflict-Free-Replicated Datatypes (CRDTs) ensuring a synchronized state.
+!?[](videos/edrys_04-0.webm)
 
 ### WebRTC Communication
 
 >    --{{0}}--
 > The Web Real-Time Communication is a free and open-source project providing web browsers and mobile applications with real-time communication (RTC) via application programming interfaces (APIs).
 > It allows audio and video communication to work inside web pages by allowing direct peer-to-peer communication, eliminating the need to install plugins or download native apps...
+> !?[](videos/edrys_05-0.webm)
 >
 > _Source: [Wikipedia](https://en.wikipedia.org/wiki/WebRTC)_
 
@@ -71,14 +76,16 @@ Alice 👩‍💻 <------------------------------> 👨🏾‍💻 Bob
 ```
 
     --{{1}}--
-But the entire process is actually a bit more complicated. At first Alice initiates the WebRTC connection by generating an SDP offer that details her media capabilities, such as the types of audio and video streams she supports, along with the associated codecs and network parameters. This offer is then sent to the signaling server, which acts solely as a relay for connection setup information.
+But the entire process is actually a bit more complicated. At first, Alice initiates the WebRTC connection by generating an SDP offer that details her media capabilities, such as the types of audio and video streams she supports, along with the associated codecs and network parameters. This offer is then sent to the signaling server, which acts solely as a relay for connection setup information.
+!?[](videos/edrys_05-1.webm)
 
     --{{2}}--
 The signaling server receives Alice’s offer and forwards it to Bob. This intermediary role is crucial because it allows the initial exchange of connection data even when both parties are behind NATs or firewalls, ensuring that they can communicate the necessary parameters without directly connecting first.
+!?[](videos/edrys_05-2.webm)
 
     --{{3}}--
 After Bob receives Alice’s offer through the signaling server, he generates an SDP answer that outlines his media capabilities and confirms the proposed connection parameters. This answer provides a mutual understanding of the media exchange, indicating that Bob is ready to establish a connection and detailing his own network settings.
-
+!?[](videos/edrys_05-3.webm)
 
     {{1}}
 ``` ascii
@@ -102,12 +109,15 @@ Alice 👩‍💻 <--------'          '--------- 👨🏾‍💻 Bob
 
     --{{4}}--
 The signaling server then relays Bob’s SDP answer back to Alice. This step completes the signaling handshake, allowing both peers to possess the required session descriptions that enable them to move forward with establishing a direct connection.
+!?[](videos/edrys_05-4.webm)
 
     --{{5}}--
 With the SDP offer and answer exchanged, Alice and Bob proceed with the ICE (Interactive Connectivity Establishment) process, wherein they gather potential network paths and perform connectivity checks. If successful, this process establishes a direct peer-to-peer connection that is optimized for low latency and secure real-time communication.
+!?[](videos/edrys_05-5.webm)
 
     --{{6}}--
 If the direct connection attempt fails due to restrictive NATs or firewalls, the process falls back to using a TURN server. In this case, the TURN server relays media traffic between Alice and Bob, ensuring that the communication remains uninterrupted, even though it might introduce a bit more latency compared to a direct connection.
+!?[](videos/edrys_05-6.webm)
 
 
     {{7}}
@@ -115,6 +125,7 @@ If the direct connection attempt fails due to restrictive NATs or firewalls, the
 >
 >     --{{7}}--
 > Simply listen to another explanation on YouTube:
+> !?[](videos/edrys_05-7.webm)
 >
 > !?[WebRTC](https://www.youtube.com/watch?v=7cbD-hFkzY0)
 
@@ -122,24 +133,28 @@ If the direct connection attempt fails due to restrictive NATs or firewalls, the
 
     --{{0}}--
 A _**C**onflict-free **R**eplicated **D**ata **T**ype_ (CRDT) is a new type of data structure[^1] that can be replicated across multiple instances in a network with the following guarantees:
+!?[](videos/edrys_06-0.webm)
 
     {{1}}
 1. A replica can be updated independently, concurrently and without coordinating with other replicas.
 2. Inconsistencies can be resolved automatically.
 3. Although replicas may have different state, they are guaranteed to eventually converge.
 
-<!-- --{{1}}--
+    --{{1}}--
 CRDTs allow each replica to be updated independently and concurrently without needing to coordinate with other replicas, meaning that changes can be made even when devices are disconnected or operating in parallel. Any inconsistencies that arise from these independent updates are automatically resolved by the system, ensuring that differences are managed seamlessly. Even though replicas might temporarily have different states, the underlying design guarantees that they will eventually converge to a consistent state once all updates are shared.
--->
+!?[](videos/edrys_06-1.webm)
+
 
       {{2}}
 __Task:__ Implement an distributed counter
 
     --{{2}}--
 The following example is used only as an illustration of the problem that CRDTs solve. In practice, CRDTs are used to implement more complex data structures, such as sets, maps, and lists, that can be replicated across multiple devices in a network.
+!?[](videos/edrys_06-2.webm)
 
     --{{3}}--
 In this distributed counter, both Alice and Bob start with a value of 0. Bob first adds 5 to his counter, and his update is transmitted to Alice so that her counter also reflects a value of 5. Next, Alice increments her counter by 1, raising her local value to 6; however, if this update fails to reach Bob, he remains unaware of the change and retains his previous value of 5. Later, when Bob adds 2 to his counter, his value increases to 7, creating a divergence between the two replicas. The conceptual problem here is that without the reliability and conflict-resolution guarantees provided by CRDTs, lost messages—like Alice’s +1—result in inconsistent states, as the replicas no longer converge on a single, agreed-upon counter value.
+!?[](videos/edrys_06-3.webm)
 
     {{3}}
 ``` ascii
@@ -159,9 +174,11 @@ __Solution:__ Use Sets and Unions instead...
 
     --{{4}}--
 How can the same problem be solved for a network with messages losses, fluctuating users and no central authority.
+!?[](videos/edrys_06-4.webm)
 
     --{{5}}--
 In this CRDT-based approach, both Alice and Bob maintain a set of tuples that represent every action they perform—such as Alice starting with (a,0) and Bob with (b,0), then updating to (b,5) or (a,1) and later (b,7). Each time an update occurs, it is stored and transmitted as a tuple, and the overall state is determined by taking the union of all these sets. This means that even if a particular update message is lost during transmission, subsequent messages will eventually include the missing information, and the union operation will automatically reconcile the states across replicas. As a result, despite temporary message losses, both Alice and Bob will ultimately converge on the same comprehensive set of actions, ensuring consistency.
+!?[](videos/edrys_06-5.webm)
 
     {{5}}
 ``` ascii
@@ -184,7 +201,6 @@ __ Implementations__
    --{{6}}--
 There are several libraries and frameworks that provide CRDT implementations for various data structures, including sets, maps, and lists. However we apply Yjs, a popular CRDT library that offers a wide range of data types and synchronization mechanisms. Yjs is designed to work seamlessly with WebRTC and other real-time communication protocols, making it an ideal choice for building collaborative applications that require consistent state synchronization across multiple users.
 
-   --{{7}}--
 
 - [Automerge](https://automerge.org)
 - [__Yjs__](https://docs.yjs.dev)
@@ -220,6 +236,7 @@ With its browser-native design, edrys-Lite provides an accessible and efficient 
 
 ### Creating a Classroom
 
+    --{{0}}--
 The teacher is responsible for creating a classroom and can also open a station. (Note: The teacher can also participate as a student.)
 
 *    --{{1}}--
@@ -269,7 +286,7 @@ You can add them by their unique user ID, which is displayed in the top right co
     --{{1}}--
 By default everyone who knows the classroom URL can join the classroom as a student.
 If you add teacher IDs, these users will also have access to the settings to make modifications.
-If you add student IDs, you restrict the access to the rooms, all other can still join the classroom, but they are not allowed anymore to make modifications. They will become only visitors who can only watch, but all of their messages and state changes will be blocked
+If you add student IDs, you restrict the access to the rooms, all other can still join the classroom, but they are not allowed anymore to make modifications. They will become only visitors who can only watch, but all of their messages and state changes will be blocked.
 
 
 ### Adding Modules
