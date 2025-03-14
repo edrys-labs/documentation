@@ -631,28 +631,52 @@ console.log(Edrys.liveUser.displayName);
 console.log(Edrys.liveUser.room);
 ```
 
+---
+
+</section>
+
+    {{7}}
+<section>
+
+#### `Edrys.debug`
+
+Prints debug messages to the console.
+
+```js
+Edrys.debug = true
+```
+
 </section>
 
 #### Event Handling
 
-> **Edrys.onReady(handler)**
+      {{1}}
+<section>
+
+##### `Edrys.onReady(handler)`
 
 Register a handler to be called when Edrys is ready.
 
 ```javascript
-  Edrys.onReady(() => console.log("Module is loaded!"));
-``` 
+Edrys.onReady(() => console.log("Module is loaded!"));
+```
 
-> **Edrys.onUpdate(handler)**
+</section>
+
+      {{2}}
+<section>
+
+##### `Edrys.onUpdate(handler)`
 
 Register a handler to be called on any real-time state changes.
 
 ```javascript
-  Edrys.onUpdate(() => console.log("Module is updated!"));
+Edrys.onUpdate(() => console.log("Module is updated!"));
 ```
 
-#### Messaging
+</section>
 
+#### Messaging
 
     --{{0}}--
 Modules can send and receive messages in real time.
@@ -684,77 +708,180 @@ Edrys.sendMessage("subject", "body");
 - `handler({ from, subject, body })`: Called when a message is received.
 - `promiscuous`: If true, listens to all messages in the room; otherwise, only listens to messages for the current module.
 
-```javascript
-  Edrys.onMessage(({ from, subject, body }) => {
-    console.log("Got new message: ", from, subject, body);
-  });
+``` javascript
+Edrys.onMessage(({ from, subject, body }) => {
+  console.log("Got new message: ", from, subject, body);
+});
 ```
 
 </section>
 
 #### Local Storage
 
-Modules can store data locally to persist state across sessions.
+Modules can store data locally to persist state across sessions within the browser.
 
-> **Edrys.setItem(key, value)**
+    {{1}}
+<section>
+
+##### `Edrys.setItem(key, value)`
 
 Stores a value in local storage, scoped to the current class and user room.
 
-```javascript
-  Edrys.setItem("key", "value");
+``` javascript
+Edrys.setItem("key", "value");
 ```
 
-> **Edrys.getItem(key)**
+---
+
+</section>
+
+    {{2}}
+<section>
+
+##### `Edrys.getItem(key)`
 
 Retrieves a stored value from local storage.
 
 ```javascript
-  Edrys.getItem("key");
+Edrys.getItem("key");
 ```
+
+</section>
 
 #### State Management
 
+    --{{0}}--
 Edrys.js initializes by listening to message events from its parent frame and sets up reactive state management using Yjs.
+It therefor uses the same datatypes as Yjs.
 
-> **Edrys.clearState(key)**
+Yjs documentation: https://docs.yjs.dev/api/shared-types
+
+    {{1}}
+<section>
+
+##### `Edrys.getState(key?, type?, value?)`
+
+- Retrieves or initializes a state entry.
+- type: Can be one of `Map`, `Array`, `Text`, `XmlFragment`, `XmlText`, `XmlElement`, or `Value`.
+- If type is Value, an optional value can be provided.
+
+```javascript
+const state = Edrys.getState("key", "Map");
+
+// set two values in the map
+state.set('option1', 12)
+state.set('option2', [12 , 22, true])
+
+// get the value of option1
+console.log(state.get('option1')) // 12
+
+// get the entire map
+console.log(state.toJSON())
+// Object { option1: 12, option2: [1, 2, 3] }
+```
+
+---
+
+</section>
+
+    {{2}}
+<section>
+
+##### `Edrys.updateState(transaction : () => {})`
+
+Since every state update will trigger the `Edrys.onUpdate` handler, it is recommended to use the `updateState` method to batch state updates.
+
+```javascript
+const state = Edrys.getState("key", "Map");
+
+Edrys.updateState(() => {
+  state.set('option1', 12)
+  state.set('option2', [12 , 22, true])
+  state.set('option3', "a string")
+});
+```
+
+---
+
+</section>
+
+    {{3}}
+<section>
+
+##### `Edrys.clearState(key)`
 
 Removes a state entry from the current room.
 
 ```javascript
-  Edrys.clearState("key");
+Edrys.clearState("key");
 ```
 
-> **Edrys.updateState(callback, origin)**
+</section>
 
-Updates the state of the current room.
+#### Streaming
+
+    --{{0}}--
+A module can also share a stream of data. This can be used to share video, audio... with other users in the room.
+
+    {{1}}
+<section>
+
+##### `Edrys.sendStream(stream)`
+
+Sends a stream to all users in the station.
 
 ```javascript
-  Edrys.updateState((state) => {
-    state.set("key", "value");
-  });
+navigator.mediaDevices.getUserMedia({
+  video: Edrys.module.stationConfig?.video ?? true,
+  audio: Edrys.module.stationConfig?.audio ?? true,
+}).then(async (stream) => {
+  videoElement.srcObject = stream;
+  videoElement.autoplay = true;
+    
+  await Edrys.sendStream(stream);
+  ...
 ```
 
-> **Edrys.getState(key?, type?, value?)**
+---
 
-* Retrieves or initializes a state entry.
-* type: Can be one of Map, Array, Text, XmlFragment, XmlText, XmlElement, or Value.
-* If type is Value, an optional value can be provided.
+</section>
+
+    {{2}}
+<section>
+
+##### `Edrys.onStream(handler)`
+
+Registers a handler for receiving streams.
 
 ```javascript
-  Edrys.getState("key", "Map");
+Edrys.onStream((stream, settings) => {
+  videoElement.srcObject = stream;
+
+  // A function to apply video settings (only video/audio, rotate...)
+  applyVideoTransform(videoElement, settings);
+});
 ```
 
-#### Metadata
+</section>
+
+### Metadata
 
 Edrys scrapes module HTML files for metadata. It looks at meta tags in your HTML
 and stores this information. The following meta tags can be set:
 
-- `description`:
+- `title`: \
+  the page title tag will be used as the module name
+
+- `description`: \
   module description that will be shown to people adding your module.
   The description can consist of HTML with links and base configuration examples as well.
-- `show-in`:
-  defines where the module will be shown.
-  Can be "*" to load it everywhere, "chat" for the Lobby and other chat-rooms, or "station" to load it only on Stations
-- `title`: the page title tag will be used as the module name
 
+- `show-in`: \
+  defines where the module will be shown.
+  Can be "*" to load it everywhere, "lobby" for the Lobby and other rooms, or "station" to load it only on Stations
+
+- `fetch`: \
+  this cannot be used for every module, but it allows to fetch the index.html directly without the need of hosting.
+  This is especially useful for modules that might change in the future, but you want to have a stable version.
+  Hence, you can use the URL to a tagged version on GitHub, which will not destroy other experiments if the module configuration changes.
 
