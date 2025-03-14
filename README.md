@@ -334,6 +334,36 @@ Modules can send and receive messages in real time. Messages are sent to a speci
   });
 ```
 
+#### Streaming
+
+A module can also share a stream of data. This can be used to share video, audio... with other users in the room.
+
+> **Edrys.sendStream(stream)**
+
+Sends a stream to all users in the station.
+
+```javascript
+  navigator.mediaDevices.getUserMedia({
+    video: Edrys.module.stationConfig?.video ?? true,
+    audio: Edrys.module.stationConfig?.audio ?? true,
+  }).then(async (stream) => {
+    videoElement.srcObject = stream;
+    videoElement.autoplay = true;
+    
+    await Edrys.sendStream(stream);
+```
+
+> **Edrys.onStream(handler)**
+
+Registers a handler for receiving streams.
+
+```javascript
+  Edrys.onStream((stream, settings) => {
+    videoElement.srcObject = stream;
+    applyVideoTransform(videoElement, settings); // A function to apply video settings (only video/audio, rotate...)
+  });
+```
+
 #### Local Storage
 
 Modules can store data locally to persist state across sessions.
