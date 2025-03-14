@@ -526,7 +526,10 @@ It includes reactive properties and various functions to manage messaging, updat
 
 ##### `Edrys.ready`
 
-Boolean indicating if Edrys is initialized.
+__Boolean indicating if Edrys is initialized.__
+
+    --{{0}}--
+This boolean property indicates whether the Edrys system has finished initializing and is fully prepared to manage module interactions, ensuring that all functionalities are available before executing module-specific operations.
 
 ```js
 console.log(Edrys.ready); // true or false
@@ -541,7 +544,10 @@ console.log(Edrys.ready); // true or false
 
 #### `Edrys.role`
 
-User role within the classroom.
+__User role within the classroom.__
+
+    --{{1}}--
+This property specifies the current user's role within the classroom environment -- whether they are a teacher, student, or station -- enabling the system and modules to adapt their behavior based on the user's access level and responsibilities.
 
 ```js
 console.log(Edrys.role); // "teacher", "student", or "station"
@@ -556,7 +562,11 @@ console.log(Edrys.role); // "teacher", "student", or "station"
 
 #### `Edrys.username`
 
-The username of the current user.
+__The username of the current user.__
+
+    --{{2}}--
+This property holds the display name of the current user, serving as an identifier for personalizing the user experience and facilitating clear communication and interaction within the classroom.
+
 
 ```js
 // Current user's username
@@ -572,7 +582,10 @@ console.log(Edrys.username);
 
 #### `Edrys.module`
 
-Users of the module can pass in some run-time configuration to your module to customize its behavior.
+__Users of the module can pass in some run-time configuration to your module to customize its behavior.__
+
+    --{{3}}--
+This object contains the runtime configuration for a module, including general settings and role-specific options (for students, teachers, or stations), allowing the module to adjust its behavior dynamically based on the context in which it is used.
 
 ```js
 // Always available
@@ -594,7 +607,10 @@ console.log(Edrys.module.stationConfig);
 
 #### `Edrys.liveClass`
 
-Reactive object representing the live classroom state.
+__Reactive object representing the live classroom state.__
+
+    --{{4}}--
+This reactive state object represents the overall classroom environment by providing real-time information about active users and available rooms, which enables modules to update and respond dynamically as the classroom state changes.
 
 ```js
 // List of users in the classroom
@@ -612,7 +628,10 @@ console.log(Edrys.liveClass.rooms);
 
 #### `Edrys.liveRoom`
 
-Reactive object representing the live room state.
+__Reactive object representing the live room state.__
+
+    --{{5}}--
+This reactive object captures the current room’s state, including essential details like the room name, providing modules with the necessary context to adapt their functionality to the specific room environment.
 
 ```js
 console.log(Edrys.liveRoom.name); // Room name
@@ -627,7 +646,10 @@ console.log(Edrys.liveRoom.name); // Room name
 
 #### `Edrys.liveUser`
 
-Reactive object representing the live user state.
+__Reactive object representing the live user state.__
+
+    --{{6}}--
+This reactive state object stores personalized data about the current user, such as their display name and the room they are occupying, ensuring that modules can tailor the user experience based on individual interactions and status.
 
 ```js
 // User's display name
@@ -645,7 +667,10 @@ console.log(Edrys.liveUser.room);
 
 #### `Edrys.debug`
 
-Prints debug messages to the console.
+__Prints debug messages to the console.__
+
+    --{{7}}--
+This flag enables or disables the logging of debug messages to the console, assisting developers by providing real-time diagnostic information to help troubleshoot and monitor the internal operations of the system.
 
 ```js
 Edrys.debug = true
@@ -655,12 +680,19 @@ Edrys.debug = true
 
 #### Event Handling
 
+    --{{0}}--
+The Event Handling section details how modules can register callback functions to respond to important system events.
+These methods let you execute custom code when the Edrys system is fully initialized or when any real-time state updates occur, ensuring that your module remains synchronized with the dynamic classroom environment.
+
       {{1}}
 <section>
 
 ##### `Edrys.onReady(handler)`
 
-Register a handler to be called when Edrys is ready.
+__Register a handler to be called when Edrys is ready.__
+
+    --{{1}}--
+This method allows you to register a callback function that will be executed once the Edrys system has fully loaded and is ready to handle module interactions, ensuring that your code runs only when all essential components are initialized.
 
 ```javascript
 Edrys.onReady(() => console.log("Module is loaded!"));
@@ -673,7 +705,10 @@ Edrys.onReady(() => console.log("Module is loaded!"));
 
 ##### `Edrys.onUpdate(handler)`
 
-Register a handler to be called on any real-time state changes.
+__Register a handler to be called on any real-time state changes.__
+
+    --{{2}}--
+This function enables you to set up a callback that will be triggered on any real-time state changes within the classroom environment, allowing your module to respond dynamically to updates as they occur.
 
 ```javascript
 Edrys.onUpdate(() => console.log("Module is updated!"));
@@ -692,6 +727,9 @@ Messages are sent to a specific user only or to all users in __the same room__.
 
 ##### `Edrys.sendMessage(subject, body, user?)`
 
+    --{{1}}--
+This method enables modules to send messages in real time by specifying a subject and a body. The body, which can be of any type, is automatically handled through serialization and deserialization, ensuring smooth data exchange. Optionally, you can target a specific user by providing their identifier, otherwise the message is broadcast to all users in the same room.
+
 - Sends a message with the given subject and body.
 - The body can be of any type, this will be automatically serialized and deserialized by using [msgpackr](https://github.com/kriszyp/msgpackr).
 - user(optional): the user to send the message to, this is the `from` field when receiving the message with the `onMessage` handler.
@@ -709,6 +747,9 @@ Edrys.sendMessage("subject", "body");
 
 ##### `Edrys.onMessage(handler, promiscuous?)`
 
+    --{{2}}--
+This function allows you to register a callback that listens for incoming messages. The handler receives an object with the sender’s details, the subject, and the message body whenever a new message is received. By setting the promiscuous flag to true, the handler can capture all messages in the room, while leaving it false limits the scope to messages intended specifically for the current module.
+
 - Registers a handler for receiving messages.
 - `handler({ from, subject, body })`: Called when a message is received.
 - `promiscuous`: If true, listens to all messages in the room; otherwise, only listens to messages for the current module.
@@ -723,6 +764,7 @@ Edrys.onMessage(({ from, subject, body }) => {
 
 #### Local Storage
 
+    --{{0}}--
 Modules can store data locally to persist state across sessions within the browser.
 
     {{1}}
@@ -730,7 +772,10 @@ Modules can store data locally to persist state across sessions within the brows
 
 ##### `Edrys.setItem(key, value)`
 
-Stores a value in local storage, scoped to the current class and user room.
+__Stores a value in local storage, scoped to the current class and user room.__
+
+    --{{1}}--
+This method allows modules to save data locally within the browser, storing a specific value under a given key. The data is scoped to the current class and user room, ensuring that the information persists across sessions and remains isolated within the appropriate context.
 
 ``` javascript
 Edrys.setItem("key", "value");
@@ -745,7 +790,10 @@ Edrys.setItem("key", "value");
 
 ##### `Edrys.getItem(key)`
 
-Retrieves a stored value from local storage.
+__Retrieves a stored value from local storage.__
+
+    --{{2}}--
+This function retrieves data that was previously stored in local storage using the specified key. It enables modules to access persisted state across browser sessions, ensuring a consistent experience for users within the same classroom and room context.
 
 ```javascript
 Edrys.getItem("key");
@@ -765,6 +813,9 @@ Yjs documentation: https://docs.yjs.dev/api/shared-types
 <section>
 
 ##### `Edrys.getState(key?, type?, value?)`
+
+    --{{1}}--
+This method retrieves or initializes a reactive state entry using Yjs data structures, such as Map, Array, or Value, enabling modules to share and synchronize state across clients.
 
 - Retrieves or initializes a state entry.
 - type: Can be one of `Map`, `Array`, `Text`, `XmlFragment`, `XmlText`, `XmlElement`, or `Value`.
@@ -794,7 +845,8 @@ console.log(state.toJSON())
 
 ##### `Edrys.updateState(transaction : () => {})`
 
-Since every state update will trigger the `Edrys.onUpdate` handler, it is recommended to use the `updateState` method to batch state updates.
+    --{{2}}--
+Since every state update will trigger the `Edrys.onUpdate` handler, this function batches multiple state updates into a single transaction, ensuring that changes are applied together and trigger only one update event, thereby improving performance and consistency.
 
 ```javascript
 const state = Edrys.getState("key", "Map");
@@ -815,7 +867,10 @@ Edrys.updateState(() => {
 
 ##### `Edrys.clearState(key)`
 
-Removes a state entry from the current room.
+__Removes a state entry from the current room.__
+
+    --{{3}}--
+This method removes a specific state entry from the current room, effectively clearing any persisted data associated with the given key and keeping the reactive state clean.
 
 ```javascript
 Edrys.clearState("key");
@@ -833,7 +888,11 @@ A module can also share a stream of data. This can be used to share video, audio
 
 ##### `Edrys.sendStream(stream)`
 
-Sends a stream to all users in the station.
+__Sends a stream to all users.__
+
+    --{{1}}--
+This method transmits a media stream, such as video or audio, to all connected users.
+It allows you to share live content -- captured using the browser’s media devices -- with everyone, ensuring that the stream is broadcasted in real time across the session.
 
 ```javascript
 navigator.mediaDevices.getUserMedia({
@@ -856,7 +915,11 @@ navigator.mediaDevices.getUserMedia({
 
 ##### `Edrys.onStream(handler)`
 
-Registers a handler for receiving streams.
+__Registers a handler for receiving streams.__
+
+    --{{2}}--
+This function registers a callback to process incoming media streams from other users.
+When a stream arrives, the handler receives both the stream and any relevant settings, enabling you to display or transform the media content appropriately within your application.
 
 ```javascript
 Edrys.onStream((stream, settings) => {
@@ -871,6 +934,7 @@ Edrys.onStream((stream, settings) => {
 
 ### Metadata
 
+    --{{0}}--
 Edrys scrapes module HTML files for metadata. It looks at meta tags in your HTML
 and stores this information. The following meta tags can be set:
 
