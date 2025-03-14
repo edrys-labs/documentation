@@ -278,33 +278,39 @@ If you add student IDs, you restrict the access to the rooms, all other can stil
 If you click onto the `Settings` button and then onto modules, you can add new elements to the classroom:
 
     --{{1}}--
-If you click onto the `Explore on GitHub` button, you will see a list of available modules.
-Every module possesses a description about the configuration and with an __include URL__.
-You have to paste this URL and then  You can copy the URL of a module and paste it into the input field.
+Using the Modules Explorer, you can add modules to the classroom by clicking on the `Add` button.
 
       {{1}}
-![Add Module](images/add-module-1.png)
+![Add Module from Explorer](images/add-module-0.png)
 
     --{{2}}--
-After adding a module, you can modify where it will be shown (lobby/station), adjust its styling (width/height), and add other settings.
+For more modules, you can click onto the `Explore More` button in the Explorer, you will see a list of all modules.
+Every module possesses a description about the configuration and with an __include URL__.
+You can copy the URL of a module and paste it into the input field.
 
       {{2}}
-![Add Module](images/add-module-2.png)
+![Add Module](images/add-module-1.png)
 
     --{{3}}--
-You can also drag and drop the modules to rearrange them in the classroom.
+After adding a module, you can modify where it will be shown (lobby/station), adjust its styling (width/height), and add other settings.
+
+      {{3}}
+![Add Module](images/add-module-2.png)
 
     --{{4}}--
+You can also drag and drop the modules to rearrange them in the classroom.
+
+    --{{5}}--
 Some of the most used edrys modules are:
 
-      {{4}}
+      {{5}}
 - [Code Editor](https://github.com/edrys-labs/module-editor): A code editor that supports multiple languages.
 
 - [Video Stream](https://github.com/edrys-labs/module-station-stream): A video stream module that can be used to stream video from a station.
 
 - [PyxTerm.js Terminal](https://github.com/edrys-labs/module-pyxtermjs): A terminal module that can be used to run the code received from the editor.
 
-More modules can be found in: https://github.com/topics/edrys-module
+- More modules can be found in: https://github.com/topics/edrys-module
 
 ### Stations
 
@@ -343,12 +349,11 @@ To create a station:
 
 - Once opened, the station will appear as a dedicated room within the class.
 
-- Students can interact with the station by clicking on the room, or they can start workng on the remote lab (e.g. writing and uploading code to a connected Arduino board).
+- Students can interact with the station by clicking on the room, or they can start working on the remote lab (e.g. writing and uploading code to a connected Arduino board).
 
 - When the station URL is closed, the corresponding room will automatically disappear from the class.
 
 </section>
-
 
      {{1}}
 <section>
