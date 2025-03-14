@@ -97,18 +97,26 @@ The teacher is responsible for creating a classroom and can also open a station.
 
 There are multiple ways to add modules to the classroom:
 
-1. **Manually**: 
+1. **Using the Modules Explorer**: 
 
-    Open Settings => Modules, and paste the module URL.
+    Open Settings => Modules, and open the Modules Explorer. Click on the add button to add it to the classroom.
 
-    <div align="center" style="width: 70%; margin: auto;">
-      <img src="images/add-module-1.png"/>
+    <div align="center" style="width: 70%; margin: 10px auto;">
+      <img src="images/add-module-0.png"/>
     </div>
 
     After adding a module, you can modify where it will be shown (lobby/station), adjust styling (width/height), and add other settings.
 
     <div align="center" style="width: 70%; margin: 10px auto;">
       <img src="images/add-module-2.png"/>
+    </div>
+
+2. **Manually**: 
+
+    Open Settings => Modules, and paste the module URL.
+
+    <div align="center" style="width: 70%; margin: auto;">
+      <img src="images/add-module-1.png"/>
     </div>
 
     Some of the most used edrys modules:
@@ -121,7 +129,7 @@ There are multiple ways to add modules to the classroom:
 
     More modules can be found in: https://github.com/topics/edrys-module
 
-2. **From an existing configuration**: 
+3. **From an existing configuration**: 
 
     Open Settings => Share, and import the configuration from a local file or a URL. 
 
@@ -135,7 +143,7 @@ There are multiple ways to add modules to the classroom:
     - https://github.com/topics/edrys-lab
     - https://github.com/edrys-labs/lab-tubaf-embedded-systems
 
-3. **Create your own configuration**: 
+4. **Create your own configuration**: 
 
     You can create your own configuration by creating a YAML (or JSON) file with the appropriate structure ([Example](https://github.com/edrys-labs/edrys-exercises/blob/main/labs/arduino_blink.yml)). And then import the configuration file in the classroom settings.
 
