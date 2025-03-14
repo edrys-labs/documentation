@@ -890,3 +890,130 @@ and stores this information. The following meta tags can be set:
   This is especially useful for modules that might change in the future, but you want to have a stable version.
   Hence, you can use the URL to a tagged version on GitHub, which will not destroy other experiments if the module configuration changes.
 
+  Checkout the Markdown-It module on: https://github.com/edrys-labs/module-markdown-it
+
+### YAML-Modules
+
+    --{{0}}--
+To simplify the development of some modules, we have introduced the concept of YAML modules.
+These modules are defined in a YAML file, which are fetched and translated into HTML.
+The Markdown-It module is a good example of this concept.
+
+https://github.com/edrys-labs/module-markdown-it
+
+    --{{1}}--
+As the example shows, a YAML module consists of a simple configuration, that mirror the meta information, with `load` you can define all necessary scripts and styles to be loaded.
+The `body` is just a string representation of the HTML body, whereby `main` defines the JavaScript code to be executed.
+
+      {{1}}
+``` yaml
+name: Markdown-IT
+
+description: Write Markdown as task-descriptions for your students, this markdown interpreter additionally allows to integrate formulas, ASCII-art and videos. For more information, see <br><a href='https://github.com/Cross-Lab-Project/edrys_module-markdown-it' target='_blank'>https://github.com/Cross-Lab-Project/edrys_module-markdown-it</a>
+
+show-in:
+  - '*'
+
+load:
+  scripts:
+    - dist/index.js   
+    - https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js
+    - https://cdn.jsdelivr.net/npm/markdown-it-texmath/texmath.min.js
+    - https://cdn.jsdelivr.net/npm/katex/dist/katex.min.js
+    - https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.2.2/mermaid.min.js
+    - https://cdnjs.cloudflare.com/ajax/libs/markdown-it/13.0.1/markdown-it.min.js
+    - https://edrys-labs.github.io/module/vendor/alpine.min.js
+    - https://edrys-labs.github.io/module/edrys.js
+
+  links:
+    - https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/default.min.css
+    - https://cdn.jsdelivr.net/npm/markdown-it-texmath/css/texmath.min.css
+    - https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css
+    - https://edrys-labs.github.io/module/vendor/water.min.css
+    - https://edrys-labs.github.io/module/vendor/open-iconic/css/open-iconic.min.css
+
+style: |-
+  body {
+    margin: 0px;
+    padding: 1rem;
+    min-width: calc(100% - 2rem);
+  }
+
+body: ""
+
+main: |-
+  function init() {
+    if (window.md) return
+
+    if (!window.markdownItTextualUml) {
+      setTimeout(init, 100)
+      return
+    }
+
+    window.md = markdownit()
+
+    // enable everything
+    window.md.options.html = true
+    window.md.options.linkify = true
+    window.md.options.typographer = true
+
+    window.md.options.highlight = function (str, lang) {
+        if (lang && hljs.getLanguage(lang)) {
+            try {
+                return '<pre class="hljs"><code style="border-radius: 0px">' +
+                    hljs.highlight(str, {
+                        language: lang,
+                        ignoreIllegals: true
+                    }).value +
+                    '</code></pre>';
+            } catch (__) {}
+        }
+
+        return '<pre class="hljs"><code style="border-radius: 0px">' + md.utils.escapeHtml(str) +
+            '</code></pre>';
+    }
+
+    window.md.use(
+            texmath, {
+                engine: katex,
+                delimiters: 'dollars',
+                katexOptions: {
+                    macros: {
+                        "\\RR": "\\mathbb{R}"
+                    }
+                }
+            })
+        .use(window.markdownItTextualUml)
+  }
+
+  function render(content) {
+      if (window.md) {
+          document.body.innerHTML = md.render(content)
+
+          setTimeout(() => {
+              console.warn("loading mermaid")
+              mermaid.initialize({
+                  startOnLoad: true
+              })
+          }, 1000)
+      } else {
+        setTimeout(() => {
+          render(content)
+        }, 100)
+      }
+  }
+
+  window.onload = init
+
+  Edrys.onReady(() => {
+      console.log("Markdown-IT loaded")
+
+      init()
+
+      let content = Edrys.module.config || ""
+      
+      content += "\n\n" + ( Edrys.module[Edrys.role.toLowerCase()+'Config'] || "" )
+
+      render(content)
+  });
+```
