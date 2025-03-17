@@ -261,7 +261,7 @@ The teacher is responsible for creating a classroom and can also open a station.
 ### Adding Meta Information
 
     --{{0}}--
-If you click onto the `Settings` button, the main settings will be shown. Here you can reference a logo add a description to your classroom was well as an descriptive title. The number of room defines the initial number of rooms in the classroom, only teachers can add more rooms manually.
+If you click onto the `Settings` button, the main settings will be shown. Here you can reference a logo add a description to your classroom as well as an descriptive title. The number of room defines the initial number of rooms in the classroom, only teachers can add more rooms manually.
 
       {{0}}
 ![Add Meta Information](images/main-settings.png)
@@ -271,7 +271,7 @@ These meta information are also shown in the classroom overview.
 So you can come back and revisit the classroom later, the configuration is stored within the browser.
 
       {{1}}
-![Index-Page](images/edrys-indes.png)
+![Index-Page](images/edrys-index.png)
 
 
 ### Membership
@@ -334,7 +334,7 @@ Some of the most used edrys modules are:
     --{{0}}--
 Well as mentioned earlier, a station is a special room that can be opened to interact with hardware or to provide a special service.
 Hence, the URL looks a bit different, instead of classroom it is a station.
-Therefor the browser will know that it has to operate in another mode.
+Therefore the browser will know that it has to operate in another mode.
 
 ![Station](images/station-settings.png)
 
@@ -379,7 +379,7 @@ To create a station:
 
     --{{1}}--
 Since stations are intended to run for long periods of time, it is important to ensure that they are stable and reliable.
-Thus, by clicking onto the `Debug` button, you can see the current state of the station, you can start recording memory, network, browser console output and user connections.
+Thus, by clicking onto the `Debug` button, you can see the current state of the station, you can start recording memory, network, browser console outputs and user connections.
 
       {{1}}
 ![Debug recording](images/debug1.png)
@@ -822,7 +822,7 @@ Edrys.getItem("key");
 
     --{{0}}--
 Edrys.js initializes by listening to message events from its parent frame and sets up reactive state management using Yjs.
-It therefor uses the same datatypes as Yjs.
+It uses therefore the same datatypes as Yjs.
 
 Yjs documentation: https://docs.yjs.dev/api/shared-types
 
