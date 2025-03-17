@@ -146,7 +146,7 @@ CRDTs allow each replica to be updated independently and concurrently without ne
 
 
       {{2}}
-__Task:__ Implement an distributed counter
+__Task:__ Implement a distributed counter
 
     --{{2}}--
 The following example is used only as an illustration of the problem that CRDTs solve. In practice, CRDTs are used to implement more complex data structures, such as sets, maps, and lists, that can be replicated across multiple devices in a network.
