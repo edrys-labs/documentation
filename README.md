@@ -973,6 +973,25 @@ and stores this information. The following meta tags can be set:
 
   Checkout the Markdown-It module on: https://github.com/edrys-labs/module-markdown-it
 
+- `module-config`: \
+    a JSON object that is passed to edrys which will then create a simple form to configure the module.
+    The form fields are dynamically generated based on the schema provided. An example of a schema can be found in the [Markdown-It module (html head)](https://github.com/edrys-labs/module-markdown-it/blob/main/index.html#L15).
+
+    Supported field types include: 
+
+| Type | Field Created |
+|------|---------------|
+| `boolean` | Checkbox (`v-checkbox`) |
+| `checkboxes` | Group of checkboxes (`v-checkbox` for each option) |
+| `radio-button` | Radio button group (`v-radio-group` with `v-radio` for each option) |
+| `number` | Number input field (`v-text-field` with `type="number"`) |
+| `text-area` | Multi-line text area (`v-textarea`) |
+| `date` | Date picker (`v-text-field` with `type="date"`) |
+| `color` | Color picker (`v-color-picker`) |
+| `code-area` | Markdown editor (`prism-editor`) |
+| Default (`string`) | Single-line text input field (`v-text-field`) |
+
+
 ### YAML-Modules
 
     --{{0}}--
