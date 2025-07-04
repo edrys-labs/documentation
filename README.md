@@ -19,7 +19,7 @@ narrator: UK English Female
 Welcome to the edrys-Lite documentation!
 
     --{{0}}--
-Edrys-Lite provides an intuitive and simplistic way for users to engage with laboratory environments directly from their browser -- nearly no servers required.
+Edrys-Lite provides an intuitive and simple way for users to engage with laboratory environments directly from their browser -- nearly no servers required.
 This documentation will guide you through the process of creating and managing interactive classrooms, developing modules, and exploring the various features of edrys-Lite.
 !?[](videos/edrys_01-0.webm)
 
@@ -56,7 +56,7 @@ The modular architecture ensures that each module operates as an independent ent
 ### Principles and Technologies
 
     --{{0}}--
-As you will learn later, edrys-Lite employs a modular approach where each module can be interconnected to facilitate interaction and communication among users. The system utilizes a simple publish-subscribe (pub-sub) mechanism to enable real-time message exchange between users, it uses Conflict-Free-Replicated Datatypes (CRDTs) ensuring a synchronized state.
+As you will learn later, edrys-Lite employs a modular approach where each module can be interconnected to facilitate interaction and communication among users. The system utilizes a simple publish-subscribe (pub-sub) mechanism to enable real-time message exchange between users, and it uses Conflict-Free-Replicated Datatypes (CRDTs) ensuring a synchronized state.
 !?[](videos/edrys_04-0.webm)
 
 ### WebRTC Communication
@@ -199,7 +199,7 @@ Bob 👨🏾‍💻
 __ Implementations__
 
    --{{6}}--
-There are several libraries and frameworks that provide CRDT implementations for various data structures, including sets, maps, and lists. However we apply Yjs, a popular CRDT library that offers a wide range of data types and synchronization mechanisms. Yjs is designed to work seamlessly with WebRTC and other real-time communication protocols, making it an ideal choice for building collaborative applications that require consistent state synchronization across multiple users.
+There are several libraries and frameworks that provide CRDT implementations for various data structures, including sets, maps, and lists. However, we apply Yjs, a popular CRDT library that offers a wide range of data types and synchronization mechanisms. Yjs is designed to work seamlessly with WebRTC and other real-time communication protocols, making it an ideal choice for building collaborative applications that require consistent state synchronization across multiple users.
 
 
 - [Automerge](https://automerge.org)
@@ -261,13 +261,13 @@ The teacher is responsible for creating a classroom and can also open a station.
 ### Adding Meta Information
 
     --{{0}}--
-If you click onto the `Settings` button, the main settings will be shown. Here you can reference a logo add a description to your classroom as well as an descriptive title. The number of room defines the initial number of rooms in the classroom, only teachers can add more rooms manually.
+If you click onto the `Settings` button, the main settings will be shown. Here you can reference a logo, add a description to your classroom as well as a descriptive title. The number of room defines the initial number of rooms in the classroom, only teachers can add more rooms manually.
 
       {{0}}
 ![Add Meta Information](images/main-settings.png)
 
     --{{1}}--
-These meta information are also shown in the classroom overview.
+These metadata are also shown in the classroom overview.
 So you can come back and revisit the classroom later, the configuration is stored within the browser.
 
       {{1}}
@@ -286,7 +286,7 @@ You can add them by their unique user ID, which is displayed in the top right co
     --{{1}}--
 By default everyone who knows the classroom URL can join the classroom as a student.
 If you add teacher IDs, these users will also have access to the settings to make modifications.
-If you add student IDs, you restrict the access to the rooms, all other can still join the classroom, but they are not allowed anymore to make modifications. They will become only visitors who can only watch, but all of their messages and state changes will be blocked.
+If you add student IDs, you restrict the access to the rooms, all others can still join the classroom, but they are not allowed anymore to make modifications. They will become only visitors who can only watch, but all of their messages and state changes will be blocked.
 
 
 ### Adding Modules
@@ -314,6 +314,9 @@ After adding a module, you can modify where it will be shown (lobby/station), ad
       {{3}}
 ![Add Module](images/add-module-2.png)
 
+{{3}}
+![Add Module](images/add-module-3.png)
+
     --{{4}}--
 You can also drag and drop the modules to rearrange them in the classroom.
 
@@ -332,7 +335,7 @@ Some of the most used edrys modules are:
 ### Stations
 
     --{{0}}--
-Well as mentioned earlier, a station is a special room that can be opened to interact with hardware or to provide a special service.
+Well, as mentioned earlier, a station is a special room that can be opened to interact with hardware or to provide a special service.
 Hence, the URL looks a bit different, instead of classroom it is a station.
 Therefore the browser will know that it has to operate in another mode.
 
@@ -340,7 +343,7 @@ Therefore the browser will know that it has to operate in another mode.
 
     --{{1}}--
 The station will be shown as a separate room in the classroom, and students can interact with it by clicking on the room.
-Additionally every station has its own user, which is displayed in the right.
+Additionally, every station has its own user, which is displayed on the right.
 By changing the station name also the user name will be changed.
 You can open multiple stations, in parallel on different devices to have multiple hardware resources available.
 When the station URL is closed, the corresponding room will automatically disappear from the class.
@@ -385,7 +388,7 @@ Thus, by clicking onto the `Debug` button, you can see the current state of the 
 ![Debug recording](images/debug1.png)
 
     --{{2}}--
-All of these records will be stored in the browser and can be later inspected and replayed.
+All of these records will be stored in the browser and can later be inspected and replayed.
 
       {{2}}
 ![Debug inspection](images/debug2.png)
@@ -395,11 +398,11 @@ All of these records will be stored in the browser and can be later inspected an
 #### Example Arduino Remote Lab
 
     --{{0}}--
-An example use case of stations is to create a remote Arduino Lab, where students can remotely interact with an Arduino (upload code to it and see the result through a camera) that is physically hosted somewhere else (eg. university grounds).
+An example use case of stations is to create a remote Arduino Lab, where students can remotely interact with an Arduino (upload code to it and see the result through a camera) that is physically hosted somewhere else (e.g. university grounds).
 In this example, a university would like to allow its students access to their fleet of lab devices remotely, removing any need for students to be physically present to experiment with the devices.
 
     --{{1}}--
-To achieve this with Edrys, each Arduino would be connected to a computer with internet access (in this example a Raspberry Pi), and a station would be open on the each computer's browser.
+To achieve this with Edrys, each Arduino would be connected to a computer with internet access (in this example a Raspberry Pi), and a station would be opened on each computer's browser.
 We can use a USB webcam with the [Station-Stream](https://github.com/edrys-labs/module-station-stream) module to let students see the Arduino, the [Code Editor](https://github.com/edrys-labs/module-editor) module to allow students to upload code to it, and the [PyxTerm.js Terminal](https://github.com/edrys-labs/module-pyxtermjs) module, which needs a simple server running locally to allow the Arduino to communicate with the browser.
 
       {{1}}
@@ -416,7 +419,7 @@ The overall setup for one station could look like this:
 </div>
 
     --{{3}}--
-Overall, this allows easy set up of remote labs without configuring security, servers, port forwarding, or any other infrastructure.
+Overall, this allows easy setup of remote labs without configuring security, servers, port forwarding, or any other infrastructure.
 All that is needed is a browser running, which can be repeated for any number of stations.
 This produces a portable, scalable, and easy-to-share setup that can be replicated even by non-technical teachers.
 The same principles apply to any other lab devices (since modules can be reused, combined, or developed to accommodate any setup).
@@ -458,7 +461,7 @@ modules:
 ```
 
     --{{2}}--
-You can restore this configuration either from your you local file system or if it is hosted somewhere on the web, then you can simply paste the URL of the file and restore it from the web.
+You can restore this configuration either from your local file system or if it is hosted somewhere on the web, then you can simply paste the URL of the file and restore it from the web.
 
     --{{3}}--
 Some ready-to-use classroom configurations are available in the following repositories (You can also just click the deploy-button of the desired configuration):
@@ -467,7 +470,7 @@ Some ready-to-use classroom configurations are available in the following reposi
 https://github.com/topics/edrys-lab
 
     --{{4}}--
-Deploy-buttons are a shortcut to create a new classroom with the configuration of the repository. The only relevant part is the URL of the configuration file, which is appended to `https://edrys-labs.github.io/?/deploy/`.
+Deploy buttons are a shortcut to create a new classroom with the configuration of the repository. The only relevant part is the URL of the configuration file, which is appended to `https://edrys-labs.github.io/?/deploy/`.
 This will instruct edrys-Lite to create a new classroom with the configuration fetched from the given URL.
 
       {{4}}
@@ -480,6 +483,27 @@ You can try this out by yourself by clicking on the following button:
 
       {{5}}
 [<img src="https://img.shields.io/badge/%F0%9F%9A%80%20-%20Deploy%20Lab%20-%20light?style=plastic" height="25" />](https://edrys-labs.github.io/?/deploy/https://raw.githubusercontent.com/edrys-labs/lab-web-serial/main/laboratory/micropython.yaml)
+
+
+### Changing the communication protocol
+
+    --{{0}}--
+By default, edrys-Lite uses WebRTC for real-time communication between users. However, under certain network conditions, such as when users are behind strict firewalls or NATs, WebRTC may not work reliably.
+
+    --{{1}}--
+In such cases, you can switch to using a WebSocket-based communication protocol by changing the communication method in the classroom settings. 
+
+    {{1}}
+![Change Communication Protocol](images/communication-ws.png)
+
+    --{{2}}--
+For both WebRTC and WebSocket communication, the user can optionally modify the configuration settings, such as the signaling server URL for WebRTC or the WebSocket server URL for WebSocket communication. If the configuration is not modified, the default settings will be used.
+
+    {{2}}
+![Change Communication Protocol](images/communication-webrtc.png)
+
+    --{{3}}--
+The classroom URL will also change to reflect the communication protocol used, which is important for other users to connect to the classroom.
 
 
 ## Developing Modules
@@ -822,7 +846,7 @@ Edrys.getItem("key");
 
     --{{0}}--
 Edrys.js initializes by listening to message events from its parent frame and sets up reactive state management using Yjs.
-It uses therefore the same datatypes as Yjs.
+It therefore uses the same datatypes as Yjs.
 
 Yjs documentation: https://docs.yjs.dev/api/shared-types
 
@@ -901,49 +925,59 @@ Edrys.clearState("key");
 A module can also share a stream of data. This can be used to share video, audio... with other users in the room.
 
     {{1}}
+Streams can be shared by either using WebRTC or WebSockets. It is recommended to use WebRTC for real-time streaming, as it provides better performance and lower latency.
+However, if WebRTC is not available, you can use WebSockets as a fallback.
+
+    {{2}}
 <section>
 
-##### `Edrys.sendStream(stream)`
+##### `Edrys.sendStream(stream, settings)`
 
-__Sends a stream to all users.__
+__Sends a stream to all users in the room.__
 
-    --{{1}}--
-This method transmits a media stream, such as video or audio, to all connected users.
-It allows you to share live content -- captured using the browser’s media devices -- with everyone, ensuring that the stream is broadcasted in real time across the session.
+    --{{2}}--
+This method transmits a media stream, such as video or audio, to all connected users in the current room.
+You can configure the streaming method and WebSocket URL through the optional settings parameter.
 
 ```javascript
-navigator.mediaDevices.getUserMedia({
-  video: Edrys.module.stationConfig?.video ?? true,
-  audio: Edrys.module.stationConfig?.audio ?? true,
-}).then(async (stream) => {
-  videoElement.srcObject = stream;
-  videoElement.autoplay = true;
-    
-  await Edrys.sendStream(stream);
-  ...
+navigator.mediaDevices
+    .getUserMedia(constraints)
+    .then(async (stream) => {
+      videoElement.srcObject = stream;
+      videoElement.autoplay = true;
+      loaderElement.classList.add("hidden");
+
+      currentStream = await Edrys.sendStream(stream, {
+        method: streamMethod,
+        websocketUrl: websocketUrl,
+      });
+    })
 ```
 
 ---
 
 </section>
 
-    {{2}}
+    {{3}}
 <section>
 
 ##### `Edrys.onStream(handler)`
 
 __Registers a handler for receiving streams.__
 
-    --{{2}}--
-This function registers a callback to process incoming media streams from other users.
-When a stream arrives, the handler receives both the stream and any relevant settings, enabling you to display or transform the media content appropriately within your application.
+    --{{3}}--
+This function registers a callback to handle incoming media streams from other users in the room.
+The handler receives the stream object and associated settings when a new stream is received, allowing your module to process, display, or manipulate the incoming media content.
 
 ```javascript
 Edrys.onStream((stream, settings) => {
-  videoElement.srcObject = stream;
-
-  // A function to apply video settings (only video/audio, rotate...)
-  applyVideoTransform(videoElement, settings);
+    videoElement.srcObject = stream;
+    applyVideoTransform(videoElement, settings);
+}, {
+    method: streamMethod,
+    websocketUrl: websocketUrl,
+}).then((stream) => {
+    currentStream = stream;
 });
 ```
 
