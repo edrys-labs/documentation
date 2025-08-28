@@ -708,13 +708,18 @@ console.log(Edrys.liveUser.room);
 
 #### `Edrys.debug`
 
-__Prints debug messages to the console.__
+__Enable or disable debug messages in the console.__
 
     --{{7}}--
 This flag enables or disables the logging of debug messages to the console, assisting developers by providing real-time diagnostic information to help troubleshoot and monitor the internal operations of the system.
 
 ```js
-Edrys.debug = true
+// Import the debug function to log messages (instead of console.log, console.warn, etc)
+const dbg = Edrys.importDebug();
+// Disable debug messages (or true to enable them)
+Edrys.debug = false;
+// Log a debug message
+dbg('Survey Module Ready');
 ```
 
 </section>
