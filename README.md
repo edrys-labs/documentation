@@ -326,7 +326,7 @@ Some of the most used edrys modules are:
       {{5}}
 - [Code Editor](https://github.com/edrys-labs/module-editor): A code editor that supports multiple languages.
 
-- [Video Stream](https://github.com/edrys-labs/module-station-stream): A video stream module that can be used to stream video from a station.
+- [Video Stream](https://github.com/edrys-labs/module-streaming): A video stream module that can be used to stream video from a station.
 
 - [PyxTerm.js Terminal](https://github.com/edrys-labs/module-pyxtermjs): A terminal module that can be used to run the code received from the editor.
 
@@ -403,10 +403,10 @@ In this example, a university would like to allow its students access to their f
 
     --{{1}}--
 To achieve this with Edrys, each Arduino would be connected to a computer with internet access (in this example a Raspberry Pi), and a station would be opened on each computer's browser.
-We can use a USB webcam with the [Station-Stream](https://github.com/edrys-labs/module-station-stream) module to let students see the Arduino, the [Code Editor](https://github.com/edrys-labs/module-editor) module to allow students to upload code to it, and the [PyxTerm.js Terminal](https://github.com/edrys-labs/module-pyxtermjs) module, which needs a simple server running locally to allow the Arduino to communicate with the browser.
+We can use a USB webcam with the [Station-Stream](https://github.com/edrys-labs/module-streaming) module to let students see the Arduino, the [Code Editor](https://github.com/edrys-labs/module-editor) module to allow students to upload code to it, and the [PyxTerm.js Terminal](https://github.com/edrys-labs/module-pyxtermjs) module, which needs a simple server running locally to allow the Arduino to communicate with the browser.
 
       {{1}}
-1. [Station-Stream](https://github.com/edrys-labs/module-station-stream)
+1. [Station-Stream](https://github.com/edrys-labs/module-streaming)
 2. [Code Editor](https://github.com/edrys-labs/module-editor)
 3. [PyxTerm.js Terminal](https://github.com/edrys-labs/module-pyxtermjs)
 
