@@ -51,6 +51,10 @@ Background on how edrys-Lite works under the hood, and a guide for developers wh
 7. [How edrys-Lite Works](#How-edrys-Lite-Works)
 8. [Developing Modules](#Developing-Modules)
 
+**Help**
+
+9. [Reporting Issues](#Reporting-Issues)
+
 
 ## Getting Started
 
@@ -1560,3 +1564,40 @@ A complete real-world example is the Markdown-It module, which is available both
 - The `description` is shown as text with links, like that of an HTML module (see [Metadata](#Metadata)).
 
 </section>
+
+
+## Reporting Issues
+
+    --{{0}}--
+Found a bug, or missing a feature? Please let us know. Check the [Troubleshooting](#Troubleshooting) section first, and search the existing issues, maybe someone already reported it.
+
+<section>
+
+**Where to report**
+
+| The problem is in ...                       | Report it at                                                                                   |
+| ------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| edrys-Lite itself (classroom, settings, connection, stations) | [edrys-Lite issues](https://github.com/edrys-labs/edrys-lite/issues)      |
+| a single module (editor, terminal, stream, ...) | the issues of that module's repository, linked in its description and at https://github.com/topics/edrys-module |
+| this documentation                          | [documentation issues](https://github.com/edrys-labs/documentation/issues)                     |
+
+</section>
+
+    --{{1}}--
+A good report lets us reproduce the problem. Please include:
+
+      {{1}}
+<section>
+
+- **What you did** step by step, what you expected, and what happened instead
+- **Browser and system**, e.g. Firefox 131 on Windows 11, or Chrome on a Raspberry Pi
+- **Your role** (teacher, student, station) and whether a station was involved
+- **The connection method**, WebRTC or WebSocket (see `Settings` → `Communication`), and whether you are on a school or company network
+- **Error messages** from the browser console: press `F12` (or `Cmd+Option+I` on a Mac), open the `Console` tab, and copy the red entries
+- **Screenshots or a short screen recording**, if the problem is visible
+- For problems with a lab, the **classroom configuration** from `Settings` → `Share`. The file contains no keys or signatures, so it is safe to attach.
+
+</section>
+
+    --{{2}}--
+Please don't post your classroom link in a public issue if the classroom is meant for your students only: anyone with the link can join it, unless you have listed your students as members.
