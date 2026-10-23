@@ -822,9 +822,11 @@ __Reactive object representing the live classroom state.__
 This reactive state object represents the overall classroom environment by providing real-time information about the users who are currently present and the available rooms, which enables modules to update and respond dynamically as the classroom state changes.
 
 ```js
-// Users currently present in the classroom, keyed by their ID
+// Users currently present in the classroom, keyed by their ID:
+// { "<id>": { displayName, room, role }, ... }
 console.log(Edrys.liveClass.users);
-// List of rooms in the classroom
+// Rooms of the classroom, keyed by room name, each with the shared
+// state of its modules: { "Lobby": { ... }, "Room 1": { ... }, ... }
 console.log(Edrys.liveClass.rooms);
 ```
 
@@ -840,10 +842,13 @@ console.log(Edrys.liveClass.rooms);
 __Reactive object representing the live room state.__
 
     --{{5}}--
-This reactive object captures the current room’s state, including essential details like the room name, providing modules with the necessary context to adapt their functionality to the specific room environment.
+This reactive object holds the shared state of the current room, i.e. everything the modules in this room stored with `Edrys.getState`, as a plain object. It does not contain the room's name; that is `Edrys.liveUser.room`.
 
 ```js
-console.log(Edrys.liveRoom.name); // Room name
+// Shared state of the current room, keyed by state key
+console.log(Edrys.liveRoom);
+// Name of the current room
+console.log(Edrys.liveUser.room);
 ```
 
 ---
@@ -865,6 +870,8 @@ This reactive state object stores personalized data about the current user, such
 console.log(Edrys.liveUser?.displayName);
 // User's current room
 console.log(Edrys.liveUser?.room);
+// User's role: "teacher", "student" or "station"
+console.log(Edrys.liveUser?.role);
 ```
 
 ---
@@ -888,6 +895,24 @@ const dbg = Edrys.importDebug();
 Edrys.debug = false;
 // Log a debug message
 dbg('Survey Module Ready');
+```
+
+---
+
+</section>
+
+    {{8}}
+<section>
+
+#### `Edrys.class_id`
+
+__The ID of the classroom.__
+
+    --{{8}}--
+This property holds the unique ID of the classroom the module is loaded in, the same ID that appears in the classroom link. Use it to tell classrooms apart, for example as part of a key when your module stores data outside of edrys.
+
+```js
+console.log(Edrys.class_id);
 ```
 
 </section>
@@ -967,12 +992,16 @@ This function allows you to register a callback that listens for incoming messag
 
 - Registers a handler for receiving messages.
 - `handler({ from, subject, body })`: Called when a message is received.
-- `promiscuous`: If true, listens to all messages in the room; otherwise, only listens to messages for the current module.
+- `promiscuous`: If true, listens to all messages in the room; otherwise, only listens to messages sent by the same module (same module URL).
+- Returns a function that removes the handler again.
 
 ``` javascript
-Edrys.onMessage(({ from, subject, body }) => {
+const stop = Edrys.onMessage(({ from, subject, body }) => {
   console.log("Got new message: ", from, subject, body);
 });
+
+// later: stop listening
+stop();
 ```
 
 </section>
@@ -1035,7 +1064,8 @@ This method retrieves or initializes a reactive state entry using Yjs data struc
 
 - Retrieves or initializes a state entry.
 - type: Can be one of `Map`, `Array`, `Text`, `XmlFragment`, `XmlText`, `XmlElement`, `Value`, or `Awareness`.
-- If type is Value, an optional value can be provided.
+- If type is Value, an optional value can be provided: with a value the entry is set, without one the current value is returned.
+- Without a key, the whole state of the current room is returned (a `Y.Map`).
 
 ```javascript
 const state = Edrys.getState("key", "Map");
@@ -1146,13 +1176,19 @@ Only members in the station's room receive a stream: a viewer is connected only 
     {{2}}
 <section>
 
-##### `Edrys.sendStream(stream, settings)`
+##### `Edrys.sendStream(stream, options?)`
 
 __Sends a stream to all users in the room.__
 
     --{{2}}--
 This method transmits a media stream, such as video or audio, to all connected users in the current room.
-You can configure the streaming method and WebSocket URL through the optional settings parameter.
+You can configure the streaming method and WebSocket URL through the optional options parameter.
+
+- `options.method`: `"webrtc"` (default) or `"websocket"`.
+- `options.websocketUrl`: the relay server, for `"websocket"`.
+- `options.streamName`: tells several streams of one station apart; defaults to `stationConfig.streamName`, then `"Camera 1"`.
+- `options.peerServerConfig`: a custom PeerJS server for `"webrtc"`; defaults to `stationConfig.peerServerConfig`.
+- Resolves to `{ stop(), updateStream(newStream) }`.
 
 ```javascript
 navigator.mediaDevices
@@ -1176,13 +1212,17 @@ navigator.mediaDevices
     {{3}}
 <section>
 
-##### `Edrys.onStream(handler)`
+##### `Edrys.onStream(handler, options?)`
 
 __Registers a handler for receiving streams.__
 
     --{{3}}--
 This function registers a callback to handle incoming media streams from other users in the room.
 The handler receives the stream object and associated settings when a new stream is received, allowing your module to process, display, or manipulate the incoming media content.
+
+- `handler(stream, settings, metadata)`: `settings` is the station's `stationConfig`, `metadata` is `{ streamName, room }`.
+- `options`: the same `method`, `websocketUrl`, `streamName` and `peerServerConfig` as for `sendStream`; both sides must use the same method and stream name.
+- Resolves to `{ stop() }`.
 
 ```javascript
 Edrys.onStream((stream, settings) => {
