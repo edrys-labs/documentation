@@ -64,18 +64,17 @@ It enables seamless collaboration by allowing users to create and interact with 
 The modular architecture ensures that each module operates as an independent entity, making it configurable and reusable across different educational and experimental contexts.
 !?[](videos/edrys_03-0.webm)
 
-    --{{1}}--
+    --{{0}}--
 There is no account to create and nothing to install.
 A classroom lives in the browsers of the people who use it, and everyone connects directly to each other.
 All you need is a modern browser and the link to a classroom.
 
-      {{1}}
 - ✅ No sign-up, no password, no installation
 - ✅ Works in Chrome, Edge, Firefox and Safari
 - ✅ Classrooms are made of _modules_: editors, terminals, camera streams, task descriptions, ...
 - ✅ Remote hardware (e.g. an Arduino) can be shared with students through _stations_
 
-?![YouTube Demo](https://www.youtube.com/watch?v=6ZjGHorc2ds)
+!?[YouTube Demo](https://www.youtube.com/watch?v=6ZjGHorc2ds)
 
 ### Roles
 
@@ -98,11 +97,10 @@ With its browser-native design, edrys-Lite provides an accessible and efficient 
 The first time you open edrys-Lite, your browser creates a personal key pair for you.
 The public part of this key is your **User ID**. It identifies you in every classroom, and teachers use it to add you as a teacher or student.
 
-    --{{1}}--
+    --{{0}}--
 To find your User ID, open the menu with the three dots (⋮) in the top right corner.
 A short version of the ID is shown there; the copy button next to it copies the full ID, which is what a teacher needs.
 
-      {{1}}
 <section>
 
 - Your ID is tied to **this browser**. Another browser, another device, or a private window gives you a different ID.
@@ -117,18 +115,16 @@ A short version of the ID is shown there; the copy button next to it copies the 
   Visit https://edrys-labs.github.io and click on `Create a class`.
   By the way, the buttons in the footer allow you to have a look at the project on GitHub, read this documentation, explore several ready-to-use remote labs and visit the blog.
 
-       {{0}}
   ![Edrys-Lite](images/edrys-page.png)
 
-*    --{{1}}--
+*    --{{0}}--
   A new classroom will be generated with a unique ID in the URL, and you are its owner.
   Every new classroom starts with a **welcome guide** in the Lobby, which walks you through the first steps of the setup.
   It is an ordinary Markdown module, so you can edit or delete it at any time in `Settings` → `Modules`.
 
-       {{1}}
   ![Edrys initial classroom](images/edrys-initial-classroom.png)
 
-*    --{{2}}--
+*    --{{0}}--
   Students who open the classroom before you have set it up see a short note asking them to come back later.
 
 ### Inviting People
@@ -136,24 +132,22 @@ A short version of the ID is shown there; the copy button next to it copies the 
     --{{0}}--
 To invite people, share the classroom link from your browser's address bar.
 
-      {{0}}
 ```
 https://edrys-labs.github.io/?/classroom/<classroom-id>/<owner>
 ```
 
-    --{{1}}--
+    --{{0}}--
 The last part of the link identifies you as the owner of the classroom.
 Whoever opens the link for the first time uses it to check that the classroom setup they receive really comes from you, so always share the full link.
 
-    --{{2}}--
+    --{{0}}--
 By default, everyone with the link can join as a student.
 If you want to restrict who may take part, add your students to the members list (see [Members](#Members)).
 
-    --{{3}}--
+    --{{0}}--
 Every classroom you created or joined is listed on the start page, so you can come back to it later.
 From there you can open it again, fork it (make your own copy), or delete it from your browser.
 
-      {{3}}
 ![Index-Page](images/edrys-index.png)
 
 
@@ -170,13 +164,11 @@ Changes are applied to everyone in the classroom as soon as you click `Save`.
 In the Main tab you can give your classroom a descriptive title, reference a logo and add a description.
 These are also shown in the classroom overview on the start page.
 
-      {{0}}
 ![Add Meta Information](images/main-settings.png)
 
-    --{{1}}--
+    --{{0}}--
 The number of rooms defines how many numbered rooms (Room 1, Room 2, ...) the classroom has next to the Lobby.
 
-      {{1}}
 <section>
 
 - Raising the number adds the new rooms as soon as you save.
@@ -192,14 +184,12 @@ The number of rooms defines how many numbered rooms (Room 1, Room 2, ...) the cl
 In the Members tab you decide who teaches and who may take part.
 Members are added by their User ID (see [Your User ID](#Your-User-ID)), one ID per line.
 
-      {{0}}
 ![Members Settings](images/members.png)
 
-    --{{1}}--
+    --{{0}}--
 Teacher IDs get access to the settings, so they can modify the classroom just like you.
 The student list works as follows:
 
-      {{1}}
 <section>
 
 | Student list             | Who can take part                                                                                             |
@@ -209,7 +199,7 @@ The student list works as follows:
 
 </section>
 
-    --{{2}}--
+    --{{0}}--
 Visitors can follow what happens in the classroom, but whatever they write, send or change is ignored by everybody else.
 The members list is checked by every participant's browser, not by a server, so it cannot be bypassed by a modified client.
 
@@ -250,22 +240,20 @@ Some of the most used edrys modules are:
 Click on the gear icon next to a module to configure it.
 Here you can set its size (width and height), the rooms it appears in, and its content and settings.
 
-      {{0}}
 ![Configure Module](images/add-module-2.png)
 
-    --{{1}}--
+    --{{0}}--
 Many modules provide a configuration form with fields, checkboxes and drop-down lists.
 Some drop-down lists are presets: picking one fills in the fields below it with suitable values, which you can then adjust.
 If you prefer, you can switch to the advanced view and edit the raw configuration as YAML or JSON.
 
-      {{1}}
 ![Module Configuration Form](images/add-module-3.png)
 
-    --{{2}}--
+    --{{0}}--
 Settings can be given for everyone (`config`), or separately for students, teachers and stations.
 If a module's configuration contains an error, its gear icon turns into a warning sign.
 
-    --{{3}}--
+    --{{0}}--
 You can drag and drop modules to rearrange them. In the list, modules are grouped by the rooms they appear in.
 
 #### Show in
@@ -299,13 +287,14 @@ There is no central server that stores your classroom: it lives in your browser 
 Open `Settings` → `Share` to download a backup of your classroom, or to restore one.
 Download a backup now and then, and always before you clear your browser data.
 
+      {{1}}
 ![Load Config](images/load-config.png)
 
-    --{{1}}--
+    --{{2}}--
 You can download the configuration as a JSON or YAML file, whereby we prefer YAML for its better readability.
 The result looks similar to the following example, which can be modified manually or shared with others.
 
-     {{1}}
+     {{2}}
 ```yaml
 id: unique id of the lab
 dateCreated: date of creation
@@ -332,28 +321,28 @@ modules:
 The file contains no keys or signatures.
 Whoever restores it becomes the owner of the restored classroom, so a file can be shared freely as a template.
 
-    --{{3}}--
+    --{{2}}--
 You can restore a configuration either from your local file system or, if it is hosted somewhere on the web, by pasting the URL of the file.
 
-    --{{4}}--
+    --{{3}}--
 Some ready-to-use classroom configurations are available in the following repositories (you can also just click the deploy button of the desired configuration):
 
-      {{4}}
+      {{3}}
 https://github.com/topics/edrys-lab
 
-    --{{5}}--
+    --{{4}}--
 Deploy buttons are a shortcut to create a new classroom from a configuration file. The only relevant part is the URL of the file, which is appended to `https://edrys-labs.github.io/?/deploy/`.
 This instructs edrys-Lite to create a new classroom with the configuration fetched from the given URL.
 
-      {{5}}
+      {{4}}
 ```markdown
 [fast deploy](https://edrys-labs.github.io/?/deploy/https://raw.githubusercontent.com/edrys-labs/lab-web-serial/main/laboratory/micropython.yaml)
 ```
 
-    --{{6}}--
+    --{{5}}--
 You can try this out by yourself by clicking on the following button:
 
-      {{6}}
+      {{5}}
 [<img src="https://img.shields.io/badge/%F0%9F%9A%80%20-%20Deploy%20Lab%20-%20light?style=plastic" height="25" />](https://edrys-labs.github.io/?/deploy/https://raw.githubusercontent.com/edrys-labs/lab-web-serial/main/laboratory/micropython.yaml)
 
 
@@ -374,7 +363,7 @@ For both methods you can optionally change the server settings, such as the sign
     {{2}}
 ![Change Communication Protocol](images/communication-webrtc.png)
 
-    --{{3}}--
+    --{{2}}--
 Everyone in a classroom has to use the same settings to find each other.
 The Communication tab therefore shows a share link that contains these settings; send this link to your students instead of the plain classroom link.
 If you tick the option to keep the settings in the URL, your own address bar shows this link as well.
@@ -386,11 +375,10 @@ If you tick the option to keep the settings in the URL, your own address bar sho
 Once you have joined a classroom, the side menu on the left lists its rooms and who is in them.
 Click on a room to move there. Everyone starts in the Lobby.
 
-    --{{1}}--
+    --{{0}}--
 The modules of a room are shared by everyone in it: if one student types into an editor, the others see it right away, together with each other's cursors.
 Each room has its own state, so different groups can work in different rooms without interfering.
 
-      {{1}}
 <section>
 
 - **Room list:** Each person is shown with an icon for their role (teacher, student, station, visitor). Your own name is highlighted.
@@ -418,15 +406,14 @@ The link looks like the classroom link, but contains `station` instead of `class
 
 ![Station](images/station-settings.png)
 
-    --{{1}}--
+    --{{0}}--
 The station appears as a separate room in the classroom, and students can interact with it by clicking on the room.
 Every station also has its own user, which is shown in the room list. Changing the station name also changes this user name.
 You can open multiple stations in parallel on different devices to make several hardware resources available.
 
-      {{1}}
 ![Station](images/stations.png)
 
-    --{{2}}--
+    --{{0}}--
 A station keeps working while its tab is in the background, so the device can be used for other things in the meantime.
 When the station tab is closed, its room disappears from the classroom after a few seconds and the students in it are moved back to the Lobby.
 If the station only reloads, it comes back in the same room and the students stay.
@@ -454,7 +441,7 @@ The overall setup for one station could look like this:
 <img src="images/arduino-lab.png"/>
 </div>
 
-    --{{3}}--
+    --{{2}}--
 Overall, this allows an easy setup of remote labs without configuring security, servers, port forwarding, or any other infrastructure.
 All that is needed is a running browser, which can be repeated for any number of stations.
 This produces a portable, scalable, and easy-to-share setup that can be replicated even by non-technical teachers.
@@ -737,11 +724,11 @@ If the direct connection attempt fails due to restrictive NATs or firewalls, the
 >
 > !?[WebRTC](https://www.youtube.com/watch?v=7cbD-hFkzY0)
 
-    --{{8}}--
+    --{{7}}--
 In edrys-Lite, the connections between participants carry data, not audio or video: the classroom state, messages and presence travel over WebRTC data channels. Only camera streams of modules use WebRTC media connections, which are set up separately by the streaming module.
 A TURN server is only used if one is configured; you can add your own in [Communication](#Communication).
 
-    --{{9}}--
+    --{{7}}--
 If WebRTC is blocked entirely, a classroom can use a WebSocket server instead (see [Communication](#Communication)). The server then relays the messages between the participants, but the signatures described in [Privacy and Security](#Privacy-and-Security) are still checked by every browser.
 
 ### State Synchronization
@@ -897,7 +884,7 @@ You can also explore existing ready-to-use modules, check out the:
       {{3}}
 [`edrys-module` tag on GitHub](https://github.com/topics/edrys-module).
 
-    --{{4}}--
+    --{{3}}--
 A module only accepts messages from the edrys-Lite page that embeds it. Messages that other windows post to it, such as frames the module opens itself, are ignored by edrys.js.
 
 
@@ -909,14 +896,14 @@ It includes reactive properties and various functions to manage messaging, updat
 
 #### Properties
 
-    {{0}}
+    {{1}}
 <section>
 
 ##### `Edrys.ready`
 
 __Boolean indicating if Edrys is initialized.__
 
-    --{{0}}--
+    --{{1}}--
 This boolean property indicates whether the Edrys system has finished initializing and is fully prepared to manage module interactions, ensuring that all functionalities are available before executing module-specific operations.
 
 ```js
@@ -927,14 +914,14 @@ console.log(Edrys.ready); // true or false
 
 </section>
 
-    {{1}}
+    {{2}}
 <section>
 
-#### `Edrys.role`
+##### `Edrys.role`
 
 __User role within the classroom.__
 
-    --{{1}}--
+    --{{2}}--
 This property specifies the current user's role within the classroom environment -- whether they are a teacher, student, or station -- enabling the system and modules to adapt their behavior based on the user's access level and responsibilities.
 
 ```js
@@ -945,14 +932,14 @@ console.log(Edrys.role); // "teacher", "student", or "station"
 
 </section>
 
-    {{2}}
+    {{3}}
 <section>
 
-#### `Edrys.username`
+##### `Edrys.username`
 
 __The ID of the current user.__
 
-    --{{2}}--
+    --{{3}}--
 This property holds the identifier of the current user in the classroom. It is the key under which the user is listed in `Edrys.liveClass.users`, and the value you pass to `Edrys.sendMessage` to address a single user.
 
 
@@ -965,14 +952,14 @@ console.log(Edrys.username);
 
 </section>
 
-    {{3}}
+    {{4}}
 <section>
 
-#### `Edrys.module`
+##### `Edrys.module`
 
 __Users of the module can pass in some run-time configuration to your module to customize its behavior.__
 
-    --{{3}}--
+    --{{4}}--
 This object contains the runtime configuration for a module, including general settings and role-specific options (for students, teachers, or stations), allowing the module to adjust its behavior dynamically based on the context in which it is used.
 
 ```js
@@ -990,14 +977,14 @@ console.log(Edrys.module.stationConfig);
 
 </section>
 
-    {{4}}
+    {{5}}
 <section>
 
-#### `Edrys.liveClass`
+##### `Edrys.liveClass`
 
 __Reactive object representing the live classroom state.__
 
-    --{{4}}--
+    --{{5}}--
 This reactive state object represents the overall classroom environment by providing real-time information about the users who are currently present and the available rooms, which enables modules to update and respond dynamically as the classroom state changes.
 
 ```js
@@ -1013,14 +1000,14 @@ console.log(Edrys.liveClass.rooms);
 
 </section>
 
-    {{5}}
+    {{6}}
 <section>
 
-#### `Edrys.liveRoom`
+##### `Edrys.liveRoom`
 
 __Reactive object representing the live room state.__
 
-    --{{5}}--
+    --{{6}}--
 This reactive object holds the shared state of the current room, i.e. everything the modules in this room stored with `Edrys.getState`, as a plain object. It does not contain the room's name; that is `Edrys.liveUser.room`.
 
 ```js
@@ -1034,14 +1021,14 @@ console.log(Edrys.liveUser.room);
 
 </section>
 
-    {{6}}
+    {{7}}
 <section>
 
-#### `Edrys.liveUser`
+##### `Edrys.liveUser`
 
 __Reactive object representing the live user state.__
 
-    --{{6}}--
+    --{{7}}--
 This reactive state object stores personalized data about the current user, such as their display name and the room they are occupying. It can be undefined for a moment while the user is joining, so check it before use.
 
 ```js
@@ -1057,14 +1044,14 @@ console.log(Edrys.liveUser?.role);
 
 </section>
 
-    {{7}}
+    {{8}}
 <section>
 
-#### `Edrys.debug`
+##### `Edrys.debug`
 
 __Enable or disable debug messages in the console.__
 
-    --{{7}}--
+    --{{8}}--
 This flag enables or disables the logging of debug messages to the console, assisting developers by providing real-time diagnostic information to help troubleshoot and monitor the internal operations of the system.
 
 ```js
@@ -1080,14 +1067,14 @@ dbg('Survey Module Ready');
 
 </section>
 
-    {{8}}
+    {{9}}
 <section>
 
-#### `Edrys.class_id`
+##### `Edrys.class_id`
 
 __The ID of the classroom.__
 
-    --{{8}}--
+    --{{9}}--
 This property holds the unique ID of the classroom the module is loaded in, the same ID that appears in the classroom link. Use it to tell classrooms apart, for example as part of a key when your module stores data outside of edrys.
 
 ```js
@@ -1349,17 +1336,17 @@ Streams can be shared by either using WebRTC or WebSockets. It is recommended to
 WebRTC streams use the STUN/TURN servers configured for the classroom.
 If WebRTC is not available, you can use a WebSocket relay as a fallback.
 
-    {{1}}
+    {{2}}
 Only members in the station's room receive a stream: a viewer is connected only after it asked for the stream through a signed edrys message, and a WebSocket stream uses a random relay room that is handed out the same way.
 
-    {{2}}
+    {{3}}
 <section>
 
 ##### `Edrys.sendStream(stream, options?)`
 
 __Sends a stream to all users in the room.__
 
-    --{{2}}--
+    --{{3}}--
 This method transmits a media stream, such as video or audio, to all connected users in the current room.
 You can configure the streaming method and WebSocket URL through the optional options parameter.
 
@@ -1388,14 +1375,14 @@ navigator.mediaDevices
 
 </section>
 
-    {{3}}
+    {{4}}
 <section>
 
 ##### `Edrys.onStream(handler, options?)`
 
 __Registers a handler for receiving streams.__
 
-    --{{3}}--
+    --{{4}}--
 This function registers a callback to handle incoming media streams from other users in the room.
 The handler receives the stream object and associated settings when a new stream is received, allowing your module to process, display, or manipulate the incoming media content.
 
@@ -1466,12 +1453,11 @@ Every field has a `type`, and optionally a `hint` shown below it and a `default`
 | `code-area` | Markdown editor |
 | Default (`string`) | Single-line text input field |
 
-    --{{1}}--
+    --{{0}}--
 A `select` field can define `presets`: for each option, the values to fill into sibling fields of the same configuration type.
 An entry is either a plain value, or an object with `value` and `options` that also narrows the suggestions of a `combobox`.
 Picking an option overwrites these fields, even if they were edited by hand.
 
-      {{1}}
 ```json
 {
   "stationConfig": {
@@ -1583,10 +1569,9 @@ Found a bug, or missing a feature? Please let us know. Check the [Troubleshootin
 
 </section>
 
-    --{{1}}--
+    --{{0}}--
 A good report lets us reproduce the problem. Please include:
 
-      {{1}}
 <section>
 
 - **What you did** step by step, what you expected, and what happened instead
@@ -1599,5 +1584,5 @@ A good report lets us reproduce the problem. Please include:
 
 </section>
 
-    --{{2}}--
+    --{{0}}--
 Please don't post your classroom link in a public issue if the classroom is meant for your students only: anyone with the link can join it, unless you have listed your students as members.
