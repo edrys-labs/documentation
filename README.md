@@ -511,8 +511,9 @@ This section explains the technologies behind edrys-Lite. You don't need to know
 ### Principles and Technologies
 
     --{{0}}--
-As you have seen, edrys-Lite employs a modular approach where each module can be interconnected to facilitate interaction and communication among users. The system utilizes a simple publish-subscribe (pub-sub) mechanism to enable real-time message exchange between users, and it uses Conflict-Free-Replicated Datatypes (CRDTs) ensuring a synchronized state.
-!?[](videos/edrys_04-0.webm)
+As you have seen, edrys-Lite employs a modular approach where each module can be interconnected to facilitate interaction and communication among users.
+Two mechanisms connect them: messages, which are sent directly to the other people in a room, and a shared state, which is kept in sync by Conflict-Free Replicated Data Types (CRDTs).
+The participants' browsers are connected directly via WebRTC, or through a WebSocket relay where WebRTC is blocked.
 
 ### WebRTC Communication
 
@@ -585,6 +586,10 @@ If the direct connection attempt fails due to restrictive NATs or firewalls, the
 > !?[WebRTC](https://www.youtube.com/watch?v=7cbD-hFkzY0)
 
     --{{8}}--
+In edrys-Lite, the connections between participants carry data, not audio or video: the classroom state, messages and presence travel over WebRTC data channels. Only camera streams of modules use WebRTC media connections, which are set up separately by the streaming module.
+A TURN server is only used if one is configured; you can add your own in [Communication](#Communication).
+
+    --{{9}}--
 If WebRTC is blocked entirely, a classroom can use a WebSocket server instead (see [Communication](#Communication)). The server then relays the messages between the participants, but the signatures described in [Privacy and Security](#Privacy-and-Security) are still checked by every browser.
 
 ### State Synchronization
@@ -628,15 +633,16 @@ Bob 👨🏾‍💻
 ```
 
     {{4}}
-__Solution:__ Use Sets and Unions instead...
+__Solution:__ Let every replica count its own part...
 
     --{{4}}--
 How can the same problem be solved for a network with messages losses, fluctuating users and no central authority.
 !?[](videos/edrys_06-4.webm)
 
     --{{5}}--
-In this CRDT-based approach, both Alice and Bob maintain a set of tuples that represent every action they perform—such as Alice starting with (a,0) and Bob with (b,0), then updating to (b,5) or (a,1) and later (b,7). Each time an update occurs, it is stored and transmitted as a tuple, and the overall state is determined by taking the union of all these sets. This means that even if a particular update message is lost during transmission, subsequent messages will eventually include the missing information, and the union operation will automatically reconcile the states across replicas. As a result, despite temporary message losses, both Alice and Bob will ultimately converge on the same comprehensive set of actions, ensuring consistency.
-!?[](videos/edrys_06-5.webm)
+In this CRDT-based approach, every replica only ever changes its own entry: the total of everything it has added itself. Alice starts with (a,0) and Bob with (b,0); Bob's +5 makes his entry (b,5), Alice's +1 makes hers (a,1), and Bob's +2 makes his (b,7).
+Instead of single increments, each message carries the sender's complete state. A receiver merges it by keeping, for every entry, the larger value, and the counter's value is the sum of all entries.
+If a message is lost, like Alice's (a,1), the next one she sends contains it again. Merging the same state twice changes nothing, and the order of messages does not matter, so both replicas converge on the same value, here 1 + 7 = 8.
 
     {{5}}
 ``` ascii
@@ -657,7 +663,7 @@ Bob 👨🏾‍💻
 __Implementations__
 
    --{{6}}--
-There are several libraries and frameworks that provide CRDT implementations for various data structures, including sets, maps, and lists. However, we apply Yjs, a popular CRDT library that offers a wide range of data types and synchronization mechanisms. Yjs is designed to work seamlessly with WebRTC and other real-time communication protocols, making it an ideal choice for building collaborative applications that require consistent state synchronization across multiple users.
+There are several libraries and frameworks that provide CRDT implementations for various data structures, including sets, maps, and lists. We use Yjs, a popular CRDT library that offers shared maps, arrays and text, and that does not depend on a particular network: edrys-Lite synchronizes it over WebRTC or WebSocket.
 
 
 - [Automerge](https://automerge.org)
@@ -669,6 +675,27 @@ There are several libraries and frameworks that provide CRDT implementations for
 [^1]: The CRDT concept was defined in 2011 by Marc Shapiro, Nuno Preguiça, Carlos Baquero and Marek Zawirski.
 
       See also: https://en.wikipedia.org/wiki/Conflict-free_replicated_data_type
+
+### How edrys-Lite Puts It Together
+
+    --{{0}}--
+Every classroom is one shared Yjs document, of which every participant's browser holds a full copy. Besides it, edrys-Lite uses two kinds of information that are not stored.
+
+<section>
+
+| What                  | How it is shared                                                                                     | Kept?                                       |
+| --------------------- | ---------------------------------------------------------------------------------------------------- | ------------------------------------------- |
+| Classroom setup       | Yjs document, signed by the owner or a teacher                                                       | yes, in every participant's browser         |
+| Rooms and module state | Yjs document, one shared map per room (what modules store with `Edrys.getState`)                    | yes                                         |
+| Chat                  | Yjs document, every message signed by its author                                                     | yes                                         |
+| Who is present, and where | Yjs _Awareness_: short-lived, signed entries that every browser renews regularly               | no, an entry disappears when its user leaves |
+| Module messages       | sent directly to each person in the room, signed for sender, room and addressee                     | no                                          |
+
+</section>
+
+    --{{1}}--
+Because every browser holds the whole document, a classroom keeps working as long as one participant is online, and newcomers receive it from whoever is there.
+There is no server that could decide what is correct, so every browser checks the signatures itself and ignores what was not signed by someone allowed to make that change (see [Privacy and Security](#Privacy-and-Security)).
 
 
 ## Developing Modules
