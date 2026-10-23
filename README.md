@@ -456,6 +456,154 @@ All that is needed is a running browser, which can be repeated for any number of
 This produces a portable, scalable, and easy-to-share setup that can be replicated even by non-technical teachers.
 The same principles apply to any other lab devices, since modules can be reused, combined, or developed to accommodate any setup.
 
+### Tutorial: Build an Arduino Remote Lab
+
+    --{{0}}--
+In this tutorial you build the lab described above, step by step: students write code in the browser, press Execute, and the code is compiled and uploaded to a real Arduino Uno, while a camera shows the board.
+
+<section>
+
+**You need**
+
+- an Arduino Uno with its USB cable
+- a computer for the station that stays next to the board: Linux with [Docker](https://docs.docker.com/engine/install/) (Windows with WSL2 works too, see the [terminal module's README](https://github.com/edrys-labs/module-pyxtermjs))
+- a USB webcam pointing at the board
+- a second browser (or a private window) to test the lab as a student
+
+**The plan**
+
+| Module                                                               | Shown in | Job                                                  |
+| -------------------------------------------------------------------- | -------- | ---------------------------------------------------- |
+| [Markdown-IT](https://github.com/edrys-labs/module-markdown-it)      | Lobby    | explains the lab                                     |
+| [Code Editor](https://github.com/edrys-labs/module-monaco-editor)    | Station  | students write the code and press Execute            |
+| [Video Stream](https://github.com/edrys-labs/module-streaming)       | Station  | shows the board through the webcam                   |
+| [PyxTerm.js Terminal](https://github.com/edrys-labs/module-pyxtermjs) | Station  | compiles and uploads the code, shows the serial output |
+
+</section>
+
+#### Step 1: Create the classroom
+
+    --{{0}}--
+Create a new classroom on https://edrys-labs.github.io (see [Creating a Classroom](#Creating-a-Classroom)).
+Open `Settings` → `Main`, call it "Arduino Remote Lab", add a short description, and set the number of rooms to 0: students only need the Lobby and the station rooms.
+
+#### Step 2: Describe the lab
+
+    --{{0}}--
+Open `Settings` → `Modules`. You can reuse the welcome guide that every new classroom starts with: click its gear icon. Its text is stored in the student and teacher fields of the form; clear both and write your instructions into the general field, which everyone sees. Keep `lobby` in its `Show in` field.
+
+``` markdown
+# Arduino Remote Lab
+
+1. Click on a **Station** room in the menu on the left.
+2. Change the code in the editor and press **Execute**.
+3. The code is uploaded to the board. The camera shows the board,
+   the terminal shows what it prints.
+```
+
+    --{{1}}--
+The form has separate fields for everyone, for students and for teachers, so you can, for example, add setup notes that only teachers see.
+
+#### Step 3: Add the code editor
+
+    --{{0}}--
+Add the Code Editor from the Modules Explorer (`module-monaco-editor`) and click its gear icon.
+
+<section>
+
+- `runCommand`: `execute`. The editor sends the code under this name when someone presses Execute; the terminal listens for the same name.
+- `language`: `cpp`
+- `synchronize`: on, so everyone in the station room works on the same code
+- `value`: the code students start with, for example:
+
+``` cpp
+void setup() {
+  pinMode(LED_BUILTIN, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  digitalWrite(LED_BUILTIN, HIGH);
+  Serial.println("on");
+  delay(1000);
+  digitalWrite(LED_BUILTIN, LOW);
+  Serial.println("off");
+  delay(1000);
+}
+```
+
+- `Show in` (under `Advanced`): `station`
+
+</section>
+
+#### Step 4: Add the camera
+
+    --{{0}}--
+Add the Video Stream module (`module-streaming`). In its station settings, turn `video` on and `audio` off, and keep the method `webrtc`. Set `Show in` to `station`.
+The station shares its camera, and everyone who enters the station room sees it.
+
+#### Step 5: Add the terminal
+
+    --{{0}}--
+Add the PyxTerm.js Terminal (`module-pyxtermjs`). It connects the station's browser to a small terminal server on the station computer, which does the actual compiling and uploading.
+
+<section>
+
+In its station settings:
+
+- `server`: `http://localhost:5000/pty` (the default)
+- `execute`: `execute`, the same name as the editor's `runCommand`
+- `workflow`: `arduino-avr`. This preset fills in the board (`arduino:avr:uno`), the port (`/dev/ttyACM0`), the baud rate (`9600`) and the script that compiles, uploads and then shows the serial output. Change the board or port if yours differ.
+- `enable`: tick `student` (and `teacher`). Without it, the station ignores code and keystrokes sent by students.
+- `Show in`: `station`
+
+![Terminal configuration with the arduino-avr workflow](images/add-module-3.png)
+
+</section>
+
+    --{{1}}--
+Click `Save` in the settings. The classroom is now set up; all that is missing is a station.
+
+#### Step 6: Prepare the station computer
+
+    --{{0}}--
+Plug the Arduino and the webcam into the station computer, then start the terminal server. The Docker image contains the Arduino tools and the board cores:
+
+``` bash
+docker run -it -p 127.0.0.1:5000:5000 \
+  --device=/dev/ttyACM0:/dev/ttyACM0 \
+  edryslabs/module-pyxtermjs:latest
+```
+
+    --{{1}}--
+If your board is not on `/dev/ttyACM0`, check with `ls /dev/ttyACM* /dev/ttyUSB*` and change the command and the terminal's `port` setting accordingly. The board must be plugged in before you start the container.
+
+#### Step 7: Open the station
+
+    --{{0}}--
+Open `Settings` → `Stations` and open the station link in a browser on the station computer (see [Opening a Station](#Opening-a-Station)). Allow access to the camera when the browser asks.
+A new room `Station <name>` appears in the classroom, showing the editor, the camera and the terminal. The terminal should report that it is connected.
+
+#### Step 8: Test it as a student
+
+    --{{0}}--
+Open the classroom link in a second browser or a private window, so you join with a different User ID, as a student.
+Click on the station room, change the code (for example the delay), and press Execute.
+The terminal shows the compiler output and then the serial output, `on` and `off`, and the camera shows the LED blinking at the new speed.
+
+#### Step 9: Share it
+
+<section>
+
+- Share the classroom link with your students (see [Inviting People](#Inviting-People)).
+- For more boards, open the same station link on further computers, each with its own Arduino. Every station becomes its own room, so groups can work in parallel.
+- Download a backup in `Settings` → `Share`. The file can also serve as a template for other courses (see [Backup, Restore and Templates](#Backup%2C-Restore-and-Templates)).
+
+</section>
+
+    --{{0}}--
+Ready-made labs like this one can be found at https://github.com/topics/edrys-lab.
+
 
 ## Privacy and Security
 
