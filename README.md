@@ -985,7 +985,7 @@ console.log(Edrys.module.stationConfig);
 __Reactive object representing the live classroom state.__
 
     --{{5}}--
-This reactive state object represents the overall classroom environment by providing real-time information about the users who are currently present and the available rooms, which enables modules to update and respond dynamically as the classroom state changes.
+This reactive state object represents the overall classroom environment by providing real-time information about the users who are currently present and the available rooms, which enables modules to update and respond dynamically as the classroom state changes. It is read-only: Edrys replaces it with a fresh snapshot on every update, so read it inside `Edrys.onUpdate` rather than keeping a reference, and use `Edrys.getState` to share data. The same applies to `Edrys.liveRoom` and `Edrys.liveUser`.
 
 ```js
 // Users currently present in the classroom, keyed by their ID:
@@ -1352,7 +1352,7 @@ You can configure the streaming method and WebSocket URL through the optional op
 
 - `options.method`: `"webrtc"` (default) or `"websocket"`.
 - `options.websocketUrl`: the relay server, for `"websocket"`.
-- `options.streamName`: tells several streams of one station apart; defaults to `stationConfig.streamName`, then `"Camera 1"`.
+- `options.streamName`: tells several streams of one station apart; defaults to `stationConfig.streamName`. Without one, a `"webrtc"` stream is named `"<username>-stream"` and a `"websocket"` stream `"Camera 1"`, while `onStream` looks for `"Camera 1"`: set the same name on both sides.
 - `options.peerServerConfig`: a custom PeerJS server for `"webrtc"`; defaults to `stationConfig.peerServerConfig`.
 - Resolves to `{ stop(), updateStream(newStream) }`.
 
