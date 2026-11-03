@@ -2,7 +2,7 @@
 
 author:   André Dietrich; Jihad Hyadi
 
-version:  0.1.0
+version:  1.5.0
 
 language: en
 
@@ -69,10 +69,10 @@ There is no account to create and nothing to install.
 A classroom lives in the browsers of the people who use it, and everyone connects directly to each other.
 All you need is a modern browser and the link to a classroom.
 
-- ✅ No sign-up, no password, no installation
-- ✅ Works in Chrome, Edge, Firefox and Safari
-- ✅ Classrooms are made of _modules_: editors, terminals, camera streams, task descriptions, ...
-- ✅ Remote hardware (e.g. an Arduino) can be shared with students through _stations_
+- No sign-up, no password, no installation
+- Works in Chrome, Edge, Firefox and Safari
+- Classrooms are made of _modules_: editors, terminals, camera streams, task descriptions, ...
+- Remote hardware (e.g. an Arduino) can be shared with students through _stations_
 
 !?[YouTube Demo](https://www.youtube.com/watch?v=6ZjGHorc2ds)
 
@@ -105,7 +105,7 @@ A short version of the ID is shown there; the copy button next to it copies the 
 
 - Your ID is tied to **this browser**. Another browser, another device, or a private window gives you a different ID.
 - Clearing the site data of your browser deletes your ID and the classrooms stored in it. Download a backup of your classrooms first (see [Backup, Restore and Templates](#Backup%2C-Restore-and-Templates)).
-- The same menu also lets you switch the language of the interface.
+- The same menu also lets you switch the language of the interface and the theme: `Light`, `Dark`, or `System` to follow your device.
 
 </section>
 
@@ -114,6 +114,7 @@ A short version of the ID is shown there; the copy button next to it copies the 
 *    --{{0}}--
   Visit https://edrys-labs.github.io and click on `Create a class`.
   By the way, the buttons in the footer allow you to have a look at the project on GitHub, read this documentation, explore several ready-to-use remote labs and visit the blog.
+  The menu with the three dots (⋮) in the top right corner holds your User ID, the language and the theme.
 
   ![Edrys-Lite](images/edrys-page.png)
 
@@ -125,12 +126,17 @@ A short version of the ID is shown there; the copy button next to it copies the 
   ![Edrys initial classroom](images/edrys-initial-classroom.png)
 
 *    --{{0}}--
+  The button in the top left corner (☰) opens the rooms menu. It lists the rooms and the people in them, and the ⚙️ `Settings` button next to the class name.
+  While the menu is closed, the top bar shows the room you are in and how many people are there.
+
+*    --{{0}}--
   Students who open the classroom before you have set it up see a short note asking them to come back later.
 
 ### Inviting People
 
     --{{0}}--
-To invite people, share the classroom link from your browser's address bar.
+To invite people, send them the classroom link.
+You find it as `Class link` at the top of `Settings` → `Members`, with buttons to copy it or to open it in a new tab. It is the same link as in your browser's address bar.
 
 ```
 https://edrys-labs.github.io/?/classroom/<classroom-id>/<owner>
@@ -145,29 +151,34 @@ By default, everyone with the link can join as a student.
 If you want to restrict who may take part, add your students to the members list (see [Members](#Members)).
 
     --{{0}}--
-Every classroom you created or joined is listed on the start page, so you can come back to it later.
-From there you can open it again, fork it (make your own copy), or delete it from your browser.
+Every classroom you created or joined is listed on the start page under `Your classrooms`, so you can come back to it later.
+Each card shows whether you own the class or take part as a teacher or student. From there you can open it again, fork it (make your own copy), or delete it from your browser.
+A class without a logo gets a generated picture, so the cards are easy to tell apart.
 
 ![Index-Page](images/edrys-index.png)
+
+    --{{0}}--
+The note above the cards is a reminder that your classrooms are stored only in this browser (see [Backup, Restore and Templates](#Backup%2C-Restore-and-Templates)).
 
 
 ## Setting up a Classroom
 
     --{{0}}--
-Teachers configure the classroom through the `Settings` button next to the classroom name.
-The settings are split into the tabs Main, Members, Modules, Stations, Share and Communication.
-Changes are applied to everyone in the classroom as soon as you click `Save`.
+Teachers configure the classroom through the ⚙️ `Settings` button next to the class name in the rooms menu (☰).
+The settings are split into the tabs Main, Members, Modules, Stations, Import / Export and Communication.
+Changes are applied to everyone in the classroom as soon as you click `Save`. Until then, `Unsaved changes` is shown next to the button.
 
 ### Main Settings
 
     --{{0}}--
-In the Main tab you can give your classroom a descriptive title, reference a logo and add a description.
-These are also shown in the classroom overview on the start page.
+In the Main tab you can give your classroom a name and a description, and optionally the URL of a logo.
+If you leave the logo empty, the class keeps its generated picture.
+The preview next to the fields shows how the class appears on the start page.
 
 ![Add Meta Information](images/main-settings.png)
 
     --{{0}}--
-The number of rooms defines how many numbered rooms (Room 1, Room 2, ...) the classroom has next to the Lobby.
+The number of rooms defines how many numbered rooms (Room 1, Room 2, ...) the classroom opens with next to the Lobby. Stations add their own rooms on top.
 
 <section>
 
@@ -182,12 +193,13 @@ The number of rooms defines how many numbered rooms (Room 1, Room 2, ...) the cl
 
     --{{0}}--
 In the Members tab you decide who teaches and who may take part.
-Members are added by their User ID (see [Your User ID](#Your-User-ID)), one ID per line.
+At the top you find the `Class link` to send to your class (see [Inviting People](#Inviting-People)).
+Below, members are added by their User ID (see [Your User ID](#Your-User-ID)), separated by commas.
 
 ![Members Settings](images/members.png)
 
     --{{0}}--
-Teacher IDs get access to the settings, so they can modify the classroom just like you.
+Teachers get access to the settings, so they can change the classroom just like you: its settings, modules and members.
 The student list works as follows:
 
 <section>
@@ -210,16 +222,16 @@ Modules are the building blocks of a classroom: task descriptions, code editors,
 Open `Settings` → `Modules` to add them.
 
     --{{1}}--
-Using the Modules Explorer, you can add modules to the classroom by clicking on the `Add` button.
-The most frequently used modules are listed first.
+Click on `Explore modules` to open the Modules Explorer, and add a module to the classroom with its `Add` button.
+The most frequently used modules are listed first; the ⓘ button leads to a module's github repository.
 
       {{1}}
 ![Add Module from Explorer](images/add-module-0.png)
 
     --{{2}}--
-For more modules, click on the `Explore More` button in the Explorer to see a list of all modules.
+For more modules, click on `Explore more` at the bottom of the Explorer to see a list of all modules.
 Every module comes with a description of its configuration and an __include URL__.
-You can copy the URL of a module and paste it into the input field.
+You can copy the URL of a module, paste it into the `Module URL` field and click `Add`.
 
       {{2}}
 ![Add Module](images/add-module-1.png)
@@ -237,21 +249,25 @@ Some of the most used edrys modules are:
 ### Configuring Modules
 
     --{{0}}--
-Click on the gear icon next to a module to configure it.
-Here you can set its size (width and height), the rooms it appears in, and its content and settings.
-
-![Configure Module](images/add-module-2.png)
+Click on the settings button (the sliders icon) next to a module to configure it.
+The dialog has two parts: `Module Configuration` and `Advanced (raw config)`.
 
     --{{0}}--
-Many modules provide a configuration form with fields, checkboxes and drop-down lists.
+Many modules provide a configuration form under `Module Configuration`, with fields, checkboxes and drop-down lists.
 Some drop-down lists are presets: picking one fills in the fields below it with suitable values, which you can then adjust.
-If you prefer, you can switch to the advanced view and edit the raw configuration as YAML or JSON.
 
 ![Module Configuration Form](images/add-module-3.png)
 
     --{{0}}--
-Settings can be given for everyone (`config`), or separately for students, teachers and stations.
-If a module's configuration contains an error, its gear icon turns into a warning sign.
+Under `Advanced (raw config)`, every part of the module has its own row, with a summary of its current value: the module `URL`, its `Design` (width and height), its settings as YAML or JSON, and `Show in`, the rooms it appears in.
+Click on a row to open it.
+
+![Configure Module](images/add-module-2.png)
+
+    --{{0}}--
+Settings can be given for everyone (`General Settings`), or separately for students, teachers and stations.
+If a module's configuration contains an error, the module shows `Module configuration has errors` in the list.
+Click `Save Configuration` to close the dialog, and `Save` in the settings to apply the changes.
 
     --{{0}}--
 You can drag and drop modules to rearrange them. In the list, modules are grouped by the rooms they appear in.
@@ -259,7 +275,9 @@ You can drag and drop modules to rearrange them. In the list, modules are groupe
 #### Show in
 
     --{{0}}--
-The `Show in` field decides in which rooms a module appears. It is a comma separated list of the following entries:
+`Show in` decides in which rooms a module appears.
+The buttons `All rooms`, `Lobby`, one per room and `Station` switch the places on and off.
+Below them, the `As text` field shows the same as a comma separated list, which you can also edit by hand. It accepts the following entries:
 
 <section>
 
@@ -277,6 +295,7 @@ The `Show in` field decides in which rooms a module appears. It is a comma separ
 
     --{{1}}--
 For example, `lobby, Room 1, Room 2` shows a module in the Lobby and the first two rooms, and `station, station-only` shows it only to the station device, e.g. for a hardware connection that students should not see.
+`teacher-only` and `station-only` have no button; type them into the text field.
 If no module is configured for a room, the room shows a short note instead.
 
 
@@ -284,14 +303,15 @@ If no module is configured for a room, the room shows a short note instead.
 
     --{{0}}--
 There is no central server that stores your classroom: it lives in your browser and in the browsers of the people who use it.
-Open `Settings` → `Share` to download a backup of your classroom, or to restore one.
+Open `Settings` → `Import / Export` to download a backup of your classroom, or to restore one.
 Download a backup now and then, and always before you clear your browser data.
+If you have to restore a class after that, create a new class and restore the backup into it. The new class has a new link, so share it again.
 
       {{1}}
 ![Load Config](images/load-config.png)
 
     --{{2}}--
-You can download the configuration as a JSON or YAML file, whereby we prefer YAML for its better readability.
+Under `Download` you can save the configuration as a YAML or JSON file, whereby we prefer YAML for its better readability.
 The result looks similar to the following example, which can be modified manually or shared with others.
 
      {{2}}
@@ -322,10 +342,11 @@ The file contains no keys or signatures.
 Whoever restores it becomes the owner of the restored classroom, so a file can be shared freely as a template.
 
     --{{2}}--
-You can restore a configuration either from your local file system or, if it is hosted somewhere on the web, by pasting the URL of the file.
+Under `Restore` you can load a configuration either from a file on your computer or, if it is hosted somewhere on the web, from a link to the file. Click `Restore` next to it.
+The loaded configuration replaces the setup of the current class, but nothing changes for the others until you click `Save`.
 
     --{{3}}--
-Some ready-to-use classroom configurations are available in the following repositories (you can also just click the deploy button of the desired configuration):
+Some ready-to-use classroom configurations are available in the following repositories, which `Explore on GitHub` under `Find labs` opens (you can also just click the deploy button of the desired configuration):
 
       {{3}}
 https://github.com/topics/edrys-lab
@@ -352,7 +373,7 @@ You can try this out by yourself by clicking on the following button:
 By default, edrys-Lite connects everyone directly to each other via WebRTC. However, under certain network conditions, such as strict firewalls or NATs at schools and universities, WebRTC may not work reliably.
 
     --{{1}}--
-In such cases, you can switch to a WebSocket connection in `Settings` → `Communication`. All messages are then relayed through a WebSocket server.
+In such cases, you can switch from `WebRTC` to `Websocket` in `Settings` → `Communication`. All messages are then relayed through a WebSocket server.
 
     {{1}}
 ![Change Communication Protocol](images/communication-ws.png)
@@ -365,15 +386,15 @@ For both methods you can optionally change the server settings, such as the sign
 
     --{{2}}--
 Everyone in a classroom has to use the same settings to find each other.
-The Communication tab therefore shows a share link that contains these settings; send this link to your students instead of the plain classroom link.
-If you tick the option to keep the settings in the URL, your own address bar shows this link as well.
+The Communication tab therefore shows a `Link with these settings`; send this link to your students instead of the plain classroom link.
+If you tick `Keep the settings in the address bar`, your own address bar shows this link as well. Otherwise the settings are read once and removed from the address after the class loads.
 
 
 ## Working in a Classroom
 
     --{{0}}--
-Once you have joined a classroom, the side menu on the left lists its rooms and who is in them.
-Click on a room to move there. Everyone starts in the Lobby.
+Once you have joined a classroom, the rooms menu (☰, or the room name in the top bar) lists its rooms and who is in them.
+Click on a room to move there. Everyone starts in the Lobby. Each room has its own color and letter, which also mark it in the top bar and in the settings.
 
     --{{0}}--
 The modules of a room are shared by everyone in it: if one student types into an editor, the others see it right away, together with each other's cursors.
@@ -381,8 +402,9 @@ Each room has its own state, so different groups can work in different rooms wit
 
 <section>
 
-- **Room list:** Each person is shown with an icon for their role (teacher, student, station, visitor). Your own name is highlighted.
+- **Room list:** Below each room you see who is in it. You are marked with `you`, and teachers and visitors with their role; everyone else is a student. Stations have their own mark.
 - **Chat:** The chat button in the top bar opens the classroom chat. A badge tells you when new messages have arrived. Messages can be formatted with Markdown.
+- **Full screen:** The button in the top right corner of a module expands it to the whole window; press it again to leave full screen.
 - **Connection:** If your connection to the classroom is lost, a `Reconnecting…` notice appears in the top bar. edrys-Lite reconnects by itself.
 
 </section>
@@ -401,13 +423,15 @@ Stations can run on any device with a browser, including servers, laptops, Raspb
 ### Opening a Station
 
     --{{0}}--
-In `Settings` → `Stations` you find the station link of your classroom. Open it on the device that should become the station (only a teacher can open a station).
+In `Settings` → `Stations` you find the station link of your classroom, with buttons to copy or open it. Open it on the device that should become the station (only a teacher can open a station).
 The link looks like the classroom link, but contains `station` instead of `classroom`, so the browser knows that it has to operate in station mode.
+Below the link, `Connected stations` lists the stations that are open right now, with the number of people in each.
 
 ![Station](images/station-settings.png)
 
     --{{0}}--
 The station appears as a separate room in the classroom, and students can interact with it by clicking on the room.
+On the station itself, a `Station Mode Active` box shows its name. Type a new name and press the arrow button to rename it; `Exit Station Mode` opens the normal classroom link instead.
 Every station also has its own user, which is shown in the room list. Changing the station name also changes this user name.
 You can open multiple stations in parallel on different devices to make several hardware resources available.
 
@@ -481,7 +505,7 @@ Open `Settings` → `Main`, call it "Arduino Remote Lab", add a short descriptio
 #### Step 2: Describe the lab
 
     --{{0}}--
-Open `Settings` → `Modules`. You can reuse the welcome guide that every new classroom starts with: click its gear icon. Its text is stored in the student and teacher fields of the form; clear both and write your instructions into the general field, which everyone sees. Keep `lobby` in its `Show in` field.
+Open `Settings` → `Modules`. You can reuse the welcome guide that every new classroom starts with: click its settings button (the sliders icon). Its text is stored in the student and teacher fields of the form; clear both and write your instructions into the general field, which everyone sees. Keep `lobby` in its `Show in` field.
 
 ``` markdown
 # Arduino Remote Lab
@@ -498,7 +522,7 @@ The form has separate fields for everyone, for students and for teachers, so you
 #### Step 3: Add the code editor
 
     --{{0}}--
-Add the Code Editor from the Modules Explorer (`module-monaco-editor`) and click its gear icon.
+Click `Explore modules`, add the Code Editor (`module-monaco-editor`) and click its settings button.
 
 <section>
 
@@ -523,14 +547,14 @@ void loop() {
 }
 ```
 
-- `Show in` (under `Advanced`): `station`
+- `Show in` (under `Advanced (raw config)`): only the `Station` button
 
 </section>
 
 #### Step 4: Add the camera
 
     --{{0}}--
-Add the Video Stream module (`module-streaming`). In its station settings, turn `video` on and `audio` off, and keep the method `webrtc`. Set `Show in` to `station`.
+Add the Video Stream module (`module-streaming`). In its station settings, turn `video` on and `audio` off, and keep the method `webrtc`. Set `Show in` to `Station`.
 The station shares its camera, and everyone who enters the station room sees it.
 
 #### Step 5: Add the terminal
@@ -546,14 +570,14 @@ In its station settings:
 - `execute`: `execute`, the same name as the editor's `runCommand`
 - `workflow`: `arduino-avr`. This preset fills in the board (`arduino:avr:uno`), the port (`/dev/ttyACM0`), the baud rate (`9600`) and the script that compiles, uploads and then shows the serial output. Change the board or port if yours differ.
 - `enable`: tick `student` (and `teacher`). Without it, the station ignores code and keystrokes sent by students.
-- `Show in`: `station`
+- `Show in`: `Station`
 
 ![Terminal configuration with the arduino-avr workflow](images/add-module-3.png)
 
 </section>
 
     --{{1}}--
-Click `Save` in the settings. The classroom is now set up; all that is missing is a station.
+Click `Save Configuration`, then `Save` in the settings. The classroom is now set up; all that is missing is a station.
 
 #### Step 6: Prepare the station computer
 
@@ -573,7 +597,7 @@ If your board is not on `/dev/ttyACM0`, check with `ls /dev/ttyACM* /dev/ttyUSB*
 
     --{{0}}--
 Open `Settings` → `Stations` and open the station link in a browser on the station computer (see [Opening a Station](#Opening-a-Station)). Allow access to the camera when the browser asks.
-A new room `Station <name>` appears in the classroom, showing the editor, the camera and the terminal. The terminal should report that it is connected.
+A new room `Station <name>` appears in the classroom and under `Connected stations`, showing the editor, the camera and the terminal. The terminal should report that it is connected.
 
 #### Step 8: Test it as a student
 
@@ -586,9 +610,9 @@ The terminal shows the compiler output and then the serial output, `on` and `off
 
 <section>
 
-- Share the classroom link with your students (see [Inviting People](#Inviting-People)).
+- Share the `Class link` from `Settings` → `Members` with your students (see [Inviting People](#Inviting-People)).
 - For more boards, open the same station link on further computers, each with its own Arduino. Every station becomes its own room, so groups can work in parallel.
-- Download a backup in `Settings` → `Share`. The file can also serve as a template for other courses (see [Backup, Restore and Templates](#Backup%2C-Restore-and-Templates)).
+- Download a backup in `Settings` → `Import / Export`. The file can also serve as a template for other courses (see [Backup, Restore and Templates](#Backup%2C-Restore-and-Templates)).
 
 </section>
 
@@ -1580,7 +1604,7 @@ A good report lets us reproduce the problem. Please include:
 - **The connection method**, WebRTC or WebSocket (see `Settings` → `Communication`), and whether you are on a school or company network
 - **Error messages** from the browser console: press `F12` (or `Cmd+Option+I` on a Mac), open the `Console` tab, and copy the red entries
 - **Screenshots or a short screen recording**, if the problem is visible
-- For problems with a lab, the **classroom configuration** from `Settings` → `Share`. The file contains no keys or signatures, so it is safe to attach.
+- For problems with a lab, the **classroom configuration** from `Settings` → `Import / Export`. The file contains no keys or signatures, so it is safe to attach.
 
 </section>
 
