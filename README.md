@@ -1078,8 +1078,13 @@ Modules use the Edrys.js library to send and receive messages in real time, allo
     <title>Reference Module</title>
 
     <script src="https://edrys-labs.github.io/module/edrys.js"></script>
+    <link rel="stylesheet" href="https://edrys-labs.github.io/module/vendor/water.min.css" />
+    <link rel="stylesheet" href="https://edrys-labs.github.io/module/edrys-module.css" />
    ...
 ```
+
+    --{{1}}--
+The two stylesheets give the module the classroom's look, in its light or dark theme (see [Styling](#Styling)).
 
     --{{2}}--
 You can also inspect the reference module, which is a good starting point for developing your own modules.
@@ -1295,6 +1300,25 @@ This property holds the unique ID of the classroom the module is loaded in, the 
 console.log(Edrys.class_id);
 ```
 
+---
+
+</section>
+
+    {{10}}
+<section>
+
+##### `Edrys.theme`
+
+__The classroom's theme: `"light"` or `"dark"`.__
+
+    --{{10}}--
+This property holds the theme the user picked in the classroom's menu (or that their system picked, with `System`). edrys.js also puts it on the module's page as `<html data-theme="light">` or `"dark"`, which is what `edrys-module.css` follows.
+
+```js
+console.log(Edrys.theme); // "light" or "dark"
+console.log(document.documentElement.dataset.theme); // the same
+```
+
 </section>
 
 #### Event Handling
@@ -1331,6 +1355,33 @@ This function enables you to set up a callback that will be triggered on any rea
 
 ```javascript
 Edrys.onUpdate(() => console.log("Module is updated!"));
+```
+
+</section>
+
+      {{3}}
+<section>
+
+##### `Edrys.onTheme(handler)`
+
+__Register a handler to be called when the classroom's theme changes.__
+
+    --{{3}}--
+The handler receives the new theme, `"light"` or `"dark"`, the first time with the first update and then whenever the user switches the theme. It returns a function that removes the handler.
+CSS that uses the `--edrys-*` variables switches by itself; only code that sets colours in JavaScript, such as an editor or terminal theme, a chart or a canvas, needs this handler.
+
+```javascript
+const color = (name) =>
+  getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+
+function applyTheme() {
+  // e.g. rebuild an editor theme from the classroom's colours
+  chart.options.color = color("--edrys-text");
+  chart.update();
+}
+
+applyTheme();
+const stop = Edrys.onTheme?.(applyTheme);
 ```
 
 </section>
@@ -1702,6 +1753,76 @@ Picking an option overwrites these fields, even if they were edited by hand.
 ```
 
 
+### Styling
+
+    --{{0}}--
+A lab is made of several modules, often from different authors. To make them look like one tool, the edrys-labs modules share one look, in the classroom's light or dark theme.
+Your module gets it from two stylesheets, linked after `edrys.js` and before your own CSS:
+
+```html
+<script src="https://edrys-labs.github.io/module/edrys.js"></script>
+<link rel="stylesheet" href="https://edrys-labs.github.io/module/vendor/water.min.css" />
+<link rel="stylesheet" href="https://edrys-labs.github.io/module/edrys-module.css" />
+```
+
+    --{{0}}--
+[water.css](https://watercss.kognise.dev) styles plain HTML. `edrys-module.css` sets its colours from the classroom's theme, the fonts (Noto Sans, and JetBrains Mono for code), and a few parts for the module's layout.
+
+#### Colours
+
+    --{{0}}--
+Take colours from the `--edrys-*` variables instead of writing hex values; then your CSS switches with the theme by itself.
+
+<section>
+
+| Use                                | Variables                                                                                       |
+| ---------------------------------- | ----------------------------------------------------------------------------------------------- |
+| page, text, headings, muted text   | `--edrys-bg`, `--edrys-text`, `--edrys-heading`, `--edrys-muted`                                |
+| buttons, main action, fields       | `--edrys-button`, `--edrys-primary`, `--edrys-on-primary`, `--edrys-field`, `--edrys-field-line` |
+| status                             | `--edrys-ok`, `--edrys-warn`, `--edrys-error`, and the pill colours `--edrys-ok-pill` etc.       |
+| code and editors                   | `--edrys-code-bg`, `--edrys-code-text`, `--edrys-keyword`, `--edrys-number`, `--edrys-selection` |
+| terminals (dark in both themes)    | `--edrys-terminal`, `--edrys-on-terminal`                                                       |
+| fonts                              | `--edrys-font`, `--edrys-mono`                                                                  |
+
+</section>
+
+    --{{0}}--
+The full list is at the top of [edrys-module.css](https://github.com/edrys-labs/edrys-lite/blob/main/static/module/edrys-module.css).
+JavaScript reads them with `getComputedStyle(document.documentElement).getPropertyValue("--edrys-bg")`, and re-applies them in [`Edrys.onTheme`](#Event-Handling).
+
+#### Layout
+
+    --{{0}}--
+Modules that show a status or have controls put them in the same places:
+
+```html
+<header class="edrys-toolbar">
+  <span id="status" class="edrys-pill ok" role="status">Connected</span>
+  <span class="edrys-spacer"></span>
+  <label for="baud">Baud rate</label>
+  <select id="baud">…</select>
+</header>
+<main>…</main>
+<footer class="edrys-footer">
+  <button class="primary" id="run">Run</button>
+</footer>
+```
+
+<section>
+
+- **No title in the module.** The frame around it already shows the module's name.
+- **`.edrys-toolbar`** at the top: the status on the left, `.edrys-spacer`, then secondary actions and settings.
+- **`.edrys-pill`** for the status: `ok` (connected, running), `warn` (connecting, waiting), `error` (failed), or no class for idle.
+- **`.edrys-footer`** at the bottom for the main actions, the primary one first as `button.primary`.
+- **`.edrys-terminal`** for terminal output; terminals stay dark in both themes.
+- **Fill the tile.** Modules can be small or large and are resizable; avoid fixed widths and horizontal scrolling.
+
+</section>
+
+    --{{1}}--
+Content modules, such as a text or slides, skip the toolbar and footer.
+The `edrys-module` skill for AI agents (see [Skills for AI Agents](#Skills-for-AI-Agents)) contains the full design guide, including how to theme Monaco, xterm, CodeMirror and chart libraries, and good example modules to copy from: [module-reference](https://github.com/edrys-labs/module-reference), [module-serial](https://github.com/edrys-labs/module-serial) and [module-survey](https://github.com/edrys-labs/module-survey).
+
 ### YAML-Modules
 
     --{{0}}--
@@ -1734,12 +1855,14 @@ load:
     - lib/helpers.js                   # relative to the YAML file
   links:
     - https://edrys-labs.github.io/module/vendor/water.min.css
+    - https://edrys-labs.github.io/module/edrys-module.css
 
 style: |-
-  body { padding: 1rem; }
+  body { margin: 0; padding: 16px 18px; max-width: none; }
+  #greeting { font-size: 1.5rem; color: var(--edrys-heading); }
 
 body: |-
-  <h1 id="greeting">Loading…</h1>
+  <p id="greeting">Loading…</p>
 
 main: |-
   Edrys.onReady(() => {
