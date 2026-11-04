@@ -6,7 +6,7 @@ version:  1.5.0
 
 language: en
 
-comment:  edrys-Lite Documentation
+comment:  edrys-lite Documentation
 
 icon:     images/logo.png
 
@@ -14,13 +14,13 @@ narrator: UK English Female
 
 -->
 
-# edrys-Lite Documentation
+# edrys-lite Documentation
 
-Welcome to the edrys-Lite documentation!
+Welcome to the edrys-lite documentation!
 
     --{{0}}--
-Edrys-Lite provides an intuitive and simple way for users to engage with laboratory environments directly from their browser -- nearly no servers required.
-This documentation will guide you through the process of creating and managing interactive classrooms, developing modules, and exploring the various features of edrys-Lite.
+edrys-lite provides an intuitive and simple way for users to engage with laboratory environments directly from their browser -- nearly no servers required.
+This documentation will guide you through the process of creating and managing interactive classrooms, developing modules, and exploring the various features of edrys-lite.
 !?[](videos/edrys_01-0.webm)
 
 - 📖 Use the contents below to get started
@@ -34,32 +34,33 @@ This documentation will guide you through the process of creating and managing i
 ## Contents
 
     --{{0}}--
-The first parts of this documentation are for everyone who uses edrys-Lite: teachers who set up a classroom and students who join one.
-Background on how edrys-Lite works under the hood, and a guide for developers who want to build their own modules, follow at the end.
+The first parts of this documentation are for everyone who uses edrys-lite: teachers who set up a classroom and students who join one.
+Background on how edrys-lite works under the hood, and a guide for developers who want to build their own modules, follow at the end.
 
-**Using edrys-Lite**
+**Using edrys-lite**
 
 1. [Getting Started](#Getting-Started)
 2. [Setting up a Classroom](#Setting-up-a-Classroom)
 3. [Working in a Classroom](#Working-in-a-Classroom)
 4. [Remote Labs with Stations](#Remote-Labs-with-Stations)
-5. [Privacy and Security](#Privacy-and-Security)
-6. [Troubleshooting](#Troubleshooting)
+5. [AI Agents and Skills](#AI-Agents-and-Skills)
+6. [Privacy and Security](#Privacy-and-Security)
+7. [Troubleshooting](#Troubleshooting)
 
 **Background and Development**
 
-7. [How edrys-Lite Works](#How-edrys-Lite-Works)
-8. [Developing Modules](#Developing-Modules)
+8. [How edrys-lite Works](#How-edrys-lite-Works)
+9. [Developing Modules](#Developing-Modules)
 
 **Help**
 
-9. [Reporting Issues](#Reporting-Issues)
+10. [Reporting Issues](#Reporting-Issues)
 
 
 ## Getting Started
 
     --{{0}}--
-Based on [edrys](https://github.com/edrys-org/edrys), edrys-Lite is a lightweight, browser-based implementation designed for remote labs and classrooms.
+Based on [edrys](https://github.com/edrys-org/edrys), edrys-lite is a lightweight, browser-based implementation designed for remote labs and classrooms.
 It enables seamless collaboration by allowing users to create and interact with various modules such as textual and graphical editors, terminals, camera streams, and drawing tools.
 The modular architecture ensures that each module operates as an independent entity, making it configurable and reusable across different educational and experimental contexts.
 !?[](videos/edrys_03-0.webm)
@@ -89,12 +90,12 @@ Everyone in a classroom has one of the following roles. Your role is shown by th
 | **Visitor** | Someone who opened the link of a classroom that only admits listed students. Visitors can watch, but cannot change anything. |
 
     --{{1}}--
-With its browser-native design, edrys-Lite provides an accessible and efficient platform for collaborative learning, leveraging modern web technologies to facilitate real-time interaction between students, teachers, and hardware-enabled stations.
+With its browser-native design, edrys-lite provides an accessible and efficient platform for collaborative learning, leveraging modern web technologies to facilitate real-time interaction between students, teachers, and hardware-enabled stations.
 
 ### Your User ID
 
     --{{0}}--
-The first time you open edrys-Lite, your browser creates a personal key pair for you.
+The first time you open edrys-lite, your browser creates a personal key pair for you.
 The public part of this key is your **User ID**. It identifies you in every classroom, and teachers use it to add you as a teacher or student.
 
     --{{0}}--
@@ -116,7 +117,7 @@ A short version of the ID is shown there; the copy button next to it copies the 
   By the way, the buttons in the footer allow you to have a look at the project on GitHub, read this documentation, explore several ready-to-use remote labs and visit the blog.
   The menu with the three dots (⋮) in the top right corner holds your User ID, the language and the theme.
 
-  ![Edrys-Lite](images/edrys-page.png)
+  ![edrys-lite](images/edrys-page.png)
 
 *    --{{0}}--
   A new classroom will be generated with a unique ID in the URL, and you are its owner.
@@ -353,7 +354,7 @@ https://github.com/topics/edrys-lab
 
     --{{4}}--
 Deploy buttons are a shortcut to create a new classroom from a configuration file. The only relevant part is the URL of the file, which is appended to `https://edrys-labs.github.io/?/deploy/`.
-This instructs edrys-Lite to create a new classroom with the configuration fetched from the given URL.
+This instructs edrys-lite to create a new classroom with the configuration fetched from the given URL.
 
       {{4}}
 ```markdown
@@ -370,7 +371,7 @@ You can try this out by yourself by clicking on the following button:
 ### Communication
 
     --{{0}}--
-By default, edrys-Lite connects everyone directly to each other via WebRTC. However, under certain network conditions, such as strict firewalls or NATs at schools and universities, WebRTC may not work reliably.
+By default, edrys-lite connects everyone directly to each other via WebRTC. However, under certain network conditions, such as strict firewalls or NATs at schools and universities, WebRTC may not work reliably.
 
     --{{1}}--
 In such cases, you can switch from `WebRTC` to `Websocket` in `Settings` → `Communication`. All messages are then relayed through a WebSocket server.
@@ -405,7 +406,7 @@ Each room has its own state, so different groups can work in different rooms wit
 - **Room list:** Below each room you see who is in it. You are marked with `you`, and teachers and visitors with their role; everyone else is a student. Stations have their own mark.
 - **Chat:** The chat button in the top bar opens the classroom chat. A badge tells you when new messages have arrived. Messages can be formatted with Markdown.
 - **Full screen:** The button in the top right corner of a module expands it to the whole window; press it again to leave full screen.
-- **Connection:** If your connection to the classroom is lost, a `Reconnecting…` notice appears in the top bar. edrys-Lite reconnects by itself.
+- **Connection:** If your connection to the classroom is lost, a `Reconnecting…` notice appears in the top bar. edrys-lite reconnects by itself.
 
 </section>
 
@@ -413,8 +414,8 @@ Each room has its own state, so different groups can work in different rooms wit
 ## Remote Labs with Stations
 
     --{{0}}--
-Edrys-Lite stations enable remote labs, automated grading, and other experiences where an automated or hardware-based interaction is required.
-A station is simply an instance of an edrys-Lite classroom running in "station mode" and left open to handle student interactions.
+edrys-lite stations enable remote labs, automated grading, and other experiences where an automated or hardware-based interaction is required.
+A station is simply an instance of an edrys-lite classroom running in "station mode" and left open to handle student interactions.
 The functionality of a station is determined by the modules loaded within it.
 
     --{{1}}--
@@ -620,10 +621,187 @@ The terminal shows the compiler output and then the serial output, `on` and `off
 Ready-made labs like this one can be found at https://github.com/topics/edrys-lab.
 
 
+## AI Agents and Skills
+
+    --{{0}}--
+AI agents such as Claude Code, GitHub Copilot or Cursor can help you build labs and modules, and they can answer your students' questions while they work.
+All of this is optional: a classroom works exactly the same without it, and nothing is set up on the hosted edrys-lite.
+
+<section>
+
+| What                                                  | For                         | What it does                                                                                     |
+| ----------------------------------------------------- | --------------------------- | ------------------------------------------------------------------------------------------------ |
+| [Skills](#Skills-for-AI-Agents)                       | teachers, module developers | teach your agent how edrys-lite labs and modules are written                                     |
+| [edrys-dev](#Building-a-Lab-with-edrys-dev)           | teachers                    | runs your lab file as a class on your computer, updated on every save                            |
+| [Agent chat](#The-Agent-Chat-for-Teachers)            | teachers                    | talk to your agent from inside the class while it changes the lab                                |
+| [Tutor](#The-Tutor-for-Students)                      | students                    | a tutor button in the class: an AI on the teacher's computer gives hints, not solutions          |
+
+</section>
+
+### Skills for AI Agents
+
+    --{{0}}--
+[Agent Skills](https://agentskills.io) are instructions and checks that an AI agent loads when a task needs them.
+The [edrys skills](https://github.com/edrys-labs/skills) give an agent what it would otherwise not know about edrys-lite: which modules exist and how they are configured, how rooms and stations work, and the `edrys.js` API.
+
+<section>
+
+- **`edrys-lab`** builds and fixes classroom configurations from existing modules: it picks the modules, configures them per role, places them in the Lobby, rooms and stations, and checks the result. On request it creates a whole lab repository with a deploy button and the setup the station computer needs.
+- **`edrys-module`** helps you write your own modules: the `edrys.js` API, the meta tags and settings form, messages, shared state and streams, a look that fits the classroom, tests and publishing.
+
+</section>
+
+    --{{0}}--
+Install both into your agent with one command; it detects the agents on your computer (Claude Code, Copilot, Cursor, Gemini CLI and many more):
+
+```bash
+npx skills add edrys-labs/skills
+```
+
+    --{{1}}--
+Then just describe what you need, for example:
+
+<section>
+
+- *"Build a remote lab for an Arduino Uno: students write code in an editor, it is compiled and uploaded at the station, and they watch the board through a webcam."*
+- *"Students in my lab press Execute and nothing happens. Here is my classroom file."*
+- *"Write an Edrys module where the teacher asks a question and students vote."*
+
+</section>
+
+    --{{1}}--
+The agent writes a configuration file, which you load in `Settings` → `Import / Export` or publish with a deploy button (see [Backup, Restore and Templates](#Backup%2C-Restore-and-Templates)).
+
+    --{{2}}--
+On [claude.ai](https://claude.ai) the skills can be uploaded as ZIP files instead; the [skills README](https://github.com/edrys-labs/skills#claudeai-web-and-desktop-app) explains how.
+Writing labs works there as well, but trying a module from a local server, testing with several browsers and setting up a station need an agent on your own computer.
+
+    --{{2}}--
+Agents still make mistakes, more often with several stations, new hardware or modules with shared state.
+Load what the agent made in a real classroom with a second browser as a student before you use it in class, and read code before you run it at a station that controls real devices.
+
+### Building a Lab with edrys-dev
+
+    --{{0}}--
+[edrys-dev](https://www.npmjs.com/package/@edryslabs/edrys-dev) runs edrys-lite on your own computer and keeps a class in step with a lab file: you write the lab in `lab.yml`, and every time you save it, the class updates in all open tabs.
+It needs [Node.js](https://nodejs.org) 20 or newer.
+
+```bash
+npx @edryslabs/edrys-dev lab.yml --open
+```
+
+<section>
+
+- **The `/?dev` tab is yours.** It is the teacher's view of the class and picks up your changes to `lab.yml`. Keep it open.
+- **The file wins.** Changes made in the class's Settings are replaced the next time you save `lab.yml`, so make them in the file.
+- **Students can join from their own computers** with the link edrys-dev prints after `students join at:`. It opens the class on https://edrys-labs.github.io, while your `/?dev` tab keeps following the file. Keep your tab open while they join.
+- **Your own modules** go into a `modules/` folder next to the lab. edrys-dev serves them locally and reloads a module in the class when you save one of its files.
+
+</section>
+
+    --{{0}}--
+When the lab is done, publish `lab.yml` the usual way, for example in a GitHub repository with a deploy link. Nothing from edrys-dev ends up in the file.
+All options are listed in the [edrys-dev README](https://github.com/edrys-labs/edrys-devserver).
+
+### The Agent Chat for Teachers
+
+    --{{0}}--
+edrys-dev can also work with your AI agent: the agent edits `lab.yml`, sees whether the class accepts it, and can look into the running class.
+The quickest start is a new lab folder that is already set up for Claude Code and VS Code Copilot:
+
+```bash
+npx @edryslabs/edrys-dev init my-lab
+```
+
+    --{{0}}--
+This creates `my-lab` with a starter `lab.yml`, the agent configuration and instructions, and offers to install the edrys skills.
+Open the folder in your agent and write "start": the agent starts edrys-dev itself, so don't start it by hand as well.
+
+    --{{1}}--
+In your class tab, the round button with the sparkles at the bottom right opens the chat with your agent.
+Only you see this chat; it is not the class chat. The agent answers with text, and sometimes with buttons or checkboxes for you to pick from.
+At the top, `Link for students` is the link to send to your class, with a `Copy` button.
+
+      {{1}}
+![The agent chat in the class tab](images/agent-chat.png)
+
+    --{{2}}--
+While you talk, the agent can see what you see:
+
+<section>
+
+- the lab file, the rooms, who is in them and the modules,
+- messages between modules and errors from your own modules,
+- what the modules of a room share, for example the code in an editor,
+- what students asked the tutor (see below), so it can tell you where they get stuck.
+
+</section>
+
+    --{{2}}--
+It can also move your tab to a room or open a student or station tab to try the lab.
+If the class cannot load your lab file, for example after a typing mistake, a red note in the chat says why.
+Chats are saved in `.edrys-dev/chats/` next to the lab, and the menu at the top of the chat reopens older ones. Add `.edrys-dev/` to your `.gitignore`.
+
+### The Tutor for Students
+
+    --{{0}}--
+With the tutor, students can ask an AI about the lab while they work. It is meant to help them get unstuck: it gives hints and explanations instead of whole solutions.
+
+#### Asking the tutor
+
+    --{{0}}--
+If your teacher has switched the tutor on, the top bar of the class shows a button with a robot.
+It opens the `Tutor` panel: type your question and press Enter.
+The tutor knows the lab and sees what the modules of your room share, such as the code in the editor. It does not see your screen or a terminal's output, so paste error messages into your question.
+
+![A student asks the tutor](images/tutor-student.png)
+
+<section>
+
+- An AI on your **teacher's computer** answers, and your teacher can read the conversation. Other students cannot.
+- Your conversation continues with your next question, so you can ask follow-up questions.
+- The button is only there while your teacher's class tab is open. If it disappears, ask your teacher.
+
+</section>
+
+#### Switching the tutor on
+
+    --{{0}}--
+The tutor is part of edrys-dev. Start it with `--tutor`, or create the lab folder with `init my-lab --tutor`.
+Questions are answered by [Claude Code](https://claude.com/claude-code) on your computer, which must be installed and signed in; with `--tutor-agent codex`, [Codex](https://developers.openai.com/codex) answers instead.
+Students need nothing but the class link.
+
+```bash
+npx @edryslabs/edrys-dev lab.yml --tutor
+```
+
+    --{{1}}--
+In your class tab, the `Students` view of the chat panel shows every question and answer as it happens.
+The switch `Tutor answers students` turns the tutor off and on without a restart; while it is off, students can't use the tutor.
+
+      {{1}}
+![The Students view: questions and the tutor's answers](images/tutor-teacher.png)
+
+<section>
+
+- **Notes for the tutor:** put a file `tutor.md` next to `lab.yml`, e.g. "Task 2 is about the delay() values, don't give the numbers". Students don't receive this file, but a student who tries hard may get the tutor to repeat it, so keep real secrets out of it.
+- **It can only answer:** the tutor runs without tools, so a student cannot reach your files, your shell or the agent that edits your lab. It reads module state but cannot change it.
+- **Limits:** each student can ask up to 20 questions an hour, the whole class up to 200 (`--tutor-per-hour` changes it).
+- **Cost:** every answer uses the account that Claude Code or Codex is signed in to. Personal plans may not allow you to answer for others; for a class, start edrys-dev with an API key, which only the tutor uses:
+
+  ```bash
+  ANTHROPIC_API_KEY=sk-ant-... npx @edryslabs/edrys-dev lab.yml --tutor
+  ```
+
+- **Privacy:** students are told that an AI on your computer answers and that you can read the chat. Questions and answers are encrypted between the student's browser and your tab, so other members of the class and a WebSocket server that relays the class cannot read them.
+
+</section>
+
+
 ## Privacy and Security
 
     --{{0}}--
-Edrys-Lite works without user accounts and without a central server that stores your data. Instead, trust is built on the keys that every browser creates for its user.
+edrys-lite works without user accounts and without a central server that stores your data. Instead, trust is built on the keys that every browser creates for its user.
 
 <section>
 
@@ -632,6 +810,7 @@ Edrys-Lite works without user accounts and without a central server that stores 
 - **Owner check:** The owner part of the classroom link lets a newcomer verify that the setup comes from the real owner.
 - **Members list:** Only teachers can change the setup. If you list your students, nobody else can take part (see [Members](#Members)).
 - **Safe content:** Chat messages and descriptions are shown as text, so they cannot run code in other people's browsers. Modules run isolated from the classroom page.
+- **Tutor:** Only if a teacher switches it on, an AI on that teacher's computer answers students' questions. The conversation is encrypted between the student and the teacher's tab, and the teacher can read it (see [The Tutor for Students](#The-Tutor-for-Students)).
 
 </section>
 
@@ -663,18 +842,26 @@ The station tab was closed or its device lost its connection. Open the station l
 
 Classrooms are stored in the browser. A different browser, a private window, or cleared site data starts empty. Restore your classroom from a backup (see [Backup, Restore and Templates](#Backup%2C-Restore-and-Templates)).
 
+**Students don't see the tutor button**
+
+The tutor only works while the teacher's edrys-dev tab (`/?dev`) is open and the switch `Tutor answers students` is on (see [The Tutor for Students](#The-Tutor-for-Students)).
+
+**The agent doesn't answer in the chat**
+
+Check that your agent runs in the lab folder. Some agents don't notice new messages while they are idle; start the `chat` prompt of the edrys server once (in VS Code Copilot: `/edrys.chat`).
+
 </section>
 
 
-## How edrys-Lite Works
+## How edrys-lite Works
 
     --{{0}}--
-This section explains the technologies behind edrys-Lite. You don't need to know them to use edrys-Lite, but they help to understand why it works without a server.
+This section explains the technologies behind edrys-lite. You don't need to know them to use edrys-lite, but they help to understand why it works without a server.
 
 ### Principles and Technologies
 
     --{{0}}--
-As you have seen, edrys-Lite employs a modular approach where each module can be interconnected to facilitate interaction and communication among users.
+As you have seen, edrys-lite employs a modular approach where each module can be interconnected to facilitate interaction and communication among users.
 Two mechanisms connect them: messages, which are sent directly to the other people in a room, and a shared state, which is kept in sync by Conflict-Free Replicated Data Types (CRDTs).
 The participants' browsers are connected directly via WebRTC, or through a WebSocket relay where WebRTC is blocked.
 
@@ -749,7 +936,7 @@ If the direct connection attempt fails due to restrictive NATs or firewalls, the
 > !?[WebRTC](https://www.youtube.com/watch?v=7cbD-hFkzY0)
 
     --{{7}}--
-In edrys-Lite, the connections between participants carry data, not audio or video: the classroom state, messages and presence travel over WebRTC data channels. Only camera streams of modules use WebRTC media connections, which are set up separately by the streaming module.
+In edrys-lite, the connections between participants carry data, not audio or video: the classroom state, messages and presence travel over WebRTC data channels. Only camera streams of modules use WebRTC media connections, which are set up separately by the streaming module.
 A TURN server is only used if one is configured; you can add your own in [Communication](#Communication).
 
     --{{7}}--
@@ -826,7 +1013,7 @@ Bob 👨🏾‍💻
 __Implementations__
 
    --{{6}}--
-There are several libraries and frameworks that provide CRDT implementations for various data structures, including sets, maps, and lists. We use Yjs, a popular CRDT library that offers shared maps, arrays and text, and that does not depend on a particular network: edrys-Lite synchronizes it over WebRTC or WebSocket.
+There are several libraries and frameworks that provide CRDT implementations for various data structures, including sets, maps, and lists. We use Yjs, a popular CRDT library that offers shared maps, arrays and text, and that does not depend on a particular network: edrys-lite synchronizes it over WebRTC or WebSocket.
 
 
 - [Automerge](https://automerge.org)
@@ -839,10 +1026,10 @@ There are several libraries and frameworks that provide CRDT implementations for
 
       See also: https://en.wikipedia.org/wiki/Conflict-free_replicated_data_type
 
-### How edrys-Lite Puts It Together
+### How edrys-lite Puts It Together
 
     --{{0}}--
-Every classroom is one shared Yjs document, of which every participant's browser holds a full copy. Besides it, edrys-Lite uses two kinds of information that are not stored.
+Every classroom is one shared Yjs document, of which every participant's browser holds a full copy. Besides it, edrys-lite uses two kinds of information that are not stored.
 
 <section>
 
@@ -909,7 +1096,10 @@ You can also explore existing ready-to-use modules, check out the:
 [`edrys-module` tag on GitHub](https://github.com/topics/edrys-module).
 
     --{{3}}--
-A module only accepts messages from the edrys-Lite page that embeds it. Messages that other windows post to it, such as frames the module opens itself, are ignored by edrys.js.
+If you work with an AI agent, install the `edrys-module` skill (see [Skills for AI Agents](#Skills-for-AI-Agents)), and try your module with [edrys-dev](#Building-a-Lab-with-edrys-dev), which reloads it in the class whenever you save.
+
+    --{{3}}--
+A module only accepts messages from the edrys-lite page that embeds it. Messages that other windows post to it, such as frames the module opens itself, are ignored by edrys.js.
 
 
 ### `edrys.js`
@@ -1587,7 +1777,7 @@ Found a bug, or missing a feature? Please let us know. Check the [Troubleshootin
 
 | The problem is in ...                       | Report it at                                                                                   |
 | ------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| edrys-Lite itself (classroom, settings, connection, stations) | [edrys-Lite issues](https://github.com/edrys-labs/edrys-lite/issues)      |
+| edrys-lite itself (classroom, settings, connection, stations) | [edrys-lite issues](https://github.com/edrys-labs/edrys-lite/issues)      |
 | a single module (editor, terminal, stream, ...) | the issues of that module's repository, linked in its description and at https://github.com/topics/edrys-module |
 | this documentation                          | [documentation issues](https://github.com/edrys-labs/documentation/issues)                     |
 
