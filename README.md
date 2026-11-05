@@ -114,10 +114,15 @@ A short version of the ID is shown there; the copy button next to it copies the 
 
 *    --{{0}}--
   Visit https://edrys-labs.github.io and click on `Create a class`.
-  By the way, the buttons in the footer allow you to have a look at the project on GitHub, read this documentation, explore several ready-to-use remote labs and visit the blog.
+  By the way, the buttons in the footer lead to the project on GitHub, to this documentation and to the blog.
   The menu with the three dots (⋮) in the top right corner holds your User ID, the language and the theme.
 
   ![edrys-lite](images/edrys-page.png)
+
+*    --{{0}}--
+  Choose `Empty class` to start from scratch, or `From a ready-made lab` to copy one of the labs from edrys-labs (see [Ready-made Labs](#Ready-made-Labs)).
+
+  ![Create a class](images/create-choice.png)
 
 *    --{{0}}--
   A new classroom will be generated with a unique ID in the URL, and you are its owner.
@@ -324,9 +329,6 @@ meta:
   logo: url of the lab logo
   description: description of the lab
   defaultNumberOfRooms: number of rooms
-members:
-  teacher: list of teacher ids
-  student: list of student ids
 modules:
   - url: url of the module
     config: available for everyone
@@ -339,18 +341,15 @@ modules:
 ```
 
     --{{2}}--
-The file contains no keys or signatures.
+The file contains no members, keys or signatures.
 Whoever restores it becomes the owner of the restored classroom, so a file can be shared freely as a template.
 
     --{{2}}--
 Under `Restore` you can load a configuration either from a file on your computer or, if it is hosted somewhere on the web, from a link to the file. Click `Restore` next to it.
-The loaded configuration replaces the setup of the current class, but nothing changes for the others until you click `Save`.
+The loaded configuration replaces the setup of the current class, its members stay, and nothing changes for the others until you click `Save`.
 
     --{{3}}--
-Some ready-to-use classroom configurations are available in the following repositories, which `Explore on GitHub` under `Find labs` opens (you can also just click the deploy button of the desired configuration):
-
-      {{3}}
-https://github.com/topics/edrys-lab
+Ready-made labs can also be loaded without a file, see [Ready-made Labs](#Ready-made-Labs).
 
     --{{4}}--
 Deploy buttons are a shortcut to create a new classroom from a configuration file. The only relevant part is the URL of the file, which is appended to `https://edrys-labs.github.io/?/deploy/`.
@@ -366,6 +365,33 @@ You can try this out by yourself by clicking on the following button:
 
       {{5}}
 [<img src="https://img.shields.io/badge/%F0%9F%9A%80%20-%20Deploy%20Lab%20-%20light?style=plastic" height="25" />](https://edrys-labs.github.io/?/deploy/https://raw.githubusercontent.com/edrys-labs/lab-web-serial/main/laboratory/micropython.yaml)
+
+
+### Ready-made Labs
+
+    --{{0}}--
+edrys-labs publishes ready-made labs, for Arduino, Calliope mini, simulators and more.
+Each one is a complete classroom setup that you can use as it is or change to fit your course.
+When you create a class, choose `From a ready-made lab` and click `Create` next to a lab: a new class is created from it, and you are its owner.
+
+      {{1}}
+![Choose a lab](images/labs-create.png)
+
+    --{{1}}--
+Search for a board or a topic, or show only the labs with or without a station.
+A lab tagged `Needs a station` uses hardware, so a computer in the lab has to run its station link (see [Remote Labs with Stations](#Remote-Labs-with-Stations)).
+Labs tagged `No station needed` work with nothing but the browsers of the participants.
+The ⓘ button opens the lab on GitHub, where its README explains what it needs.
+
+    --{{2}}--
+In an existing class, open `Settings` → `Import / Export` and click `Browse labs` under `Find labs`.
+`Use` replaces the setup of this class with the lab after you confirm it; the members of the class stay, and nothing changes for the others until you click `Save`.
+
+      {{2}}
+![Find labs](images/load-config.png)
+
+    --{{3}}--
+More labs, also from other teachers, are listed on GitHub under the topic `edrys-lab`: https://github.com/topics/edrys-lab
 
 
 ### Communication
@@ -618,7 +644,7 @@ The terminal shows the compiler output and then the serial output, `on` and `off
 </section>
 
     --{{0}}--
-Ready-made labs like this one can be found at https://github.com/topics/edrys-lab.
+Ready-made labs like this one are listed under `Create a class` → `From a ready-made lab` (see [Ready-made Labs](#Ready-made-Labs)).
 
 
 ## AI Agents and Skills
