@@ -718,7 +718,7 @@ This creates `my-lab` with a starter `lab.yml`, the agent configuration and inst
 Open the folder in your agent and write "start": the agent starts edrys-dev itself, so don't start it by hand as well.
 
     --{{1}}--
-In your class tab, the round button with the sparkles at the bottom right opens the chat with your agent.
+In your class tab, the button with the sparkles in the top bar opens the chat with your agent, on the right side of the class next to the class chat. Drag its left edge to make it wider.
 Only you see this chat; it is not the class chat. The agent answers with text, and sometimes with buttons or checkboxes for you to pick from.
 At the top, `Link for students` is the link to send to your class, with a `Copy` button.
 
@@ -776,7 +776,7 @@ npx @edryslabs/edrys-dev lab.yml --tutor
 ```
 
     --{{1}}--
-In your class tab, the `Students` view of the chat panel shows every question and answer as it happens.
+In your class tab, the `Students` view of the agent chat (sparkles button) shows every question and answer as it happens.
 The switch `Tutor answers students` turns the tutor off and on without a restart; while it is off, students can't use the tutor.
 
       {{1}}
