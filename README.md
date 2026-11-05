@@ -112,31 +112,33 @@ A short version of the ID is shown there; the copy button next to it copies the 
 
 ### Creating a Classroom
 
-*    --{{0}}--
-  Visit https://edrys-labs.github.io and click on `Create a class`.
-  By the way, the buttons in the footer lead to the project on GitHub, to this documentation and to the blog.
-  The menu with the three dots (⋮) in the top right corner holds your User ID, the language and the theme.
+    --{{0}}--
+Visit https://edrys-labs.github.io and click on `Create a class`.
+By the way, the buttons in the footer lead to the project on GitHub, to this documentation and to the blog.
+The menu with the three dots (⋮) in the top right corner holds your User ID, the language and the theme.
 
-  ![edrys-lite](images/edrys-page.png)
+![edrys-lite](images/edrys-page.png)
 
-*    --{{0}}--
-  Choose `Empty class` to start from scratch, or `From a ready-made lab` to copy one of the labs from edrys-labs (see [Ready-made Labs](#Ready-made-Labs)).
+    --{{1}}--
+Choose `Empty class` to start from scratch, or `From a ready-made lab` to copy one of the labs from edrys-labs (see [Ready-made Labs](#Ready-made-Labs)).
 
-  ![Create a class](images/create-choice.png)
+      {{1}}
+![Create a class](images/create-choice.png)
 
-*    --{{0}}--
-  A new classroom will be generated with a unique ID in the URL, and you are its owner.
-  Every new classroom starts with a **welcome guide** in the Lobby, which walks you through the first steps of the setup.
-  It is an ordinary Markdown module, so you can edit or delete it at any time in `Settings` → `Modules`.
+    --{{2}}--
+A new classroom will be generated with a unique ID in the URL, and you are its owner.
+Every new classroom starts with a **welcome guide** in the Lobby, which walks you through the first steps of the setup.
+It is an ordinary Markdown module, so you can edit or delete it at any time in `Settings` → `Modules`.
 
-  ![Edrys initial classroom](images/edrys-initial-classroom.png)
+      {{2}}
+![Edrys initial classroom](images/edrys-initial-classroom.png)
 
-*    --{{0}}--
-  The button in the top left corner (☰) opens the rooms menu. It lists the rooms and the people in them, and the ⚙️ `Settings` button next to the class name.
-  While the menu is closed, the top bar shows the room you are in and how many people are there.
+    --{{3}}--
+The button in the top left corner (☰) opens the rooms menu. It lists the rooms and the people in them, and the ⚙️ `Settings` button next to the class name.
+While the menu is closed, the top bar shows the room you are in and how many people are there.
 
-*    --{{0}}--
-  Students who open the classroom before you have set it up see a short note asking them to come back later.
+    --{{4}}--
+Students who open the classroom before you have set it up see a short note asking them to come back later.
 
 ### Inviting People
 
@@ -374,14 +376,14 @@ edrys-labs publishes ready-made labs, for Arduino, Calliope mini, simulators and
 Each one is a complete classroom setup that you can use as it is or change to fit your course.
 When you create a class, choose `From a ready-made lab` and click `Create` next to a lab: a new class is created from it, and you are its owner.
 
-      {{1}}
-![Choose a lab](images/labs-create.png)
-
     --{{1}}--
 Search for a board or a topic, or show only the labs with or without a station.
 A lab tagged `Needs a station` uses hardware, so a computer in the lab has to run its station link (see [Remote Labs with Stations](#Remote-Labs-with-Stations)).
 Labs tagged `No station needed` work with nothing but the browsers of the participants.
 The ⓘ button opens the lab on GitHub, where its README explains what it needs.
+
+      {{1}}
+![Choose a lab](images/labs-create.png)
 
     --{{2}}--
 In an existing class, open `Settings` → `Import / Export` and click `Browse labs` under `Find labs`.
@@ -911,14 +913,6 @@ Alice 👩‍💻 <------------------------------> 👨🏾‍💻 Bob
 But the entire process is actually a bit more complicated. At first, Alice initiates the WebRTC connection by generating an SDP offer that details her media capabilities, such as the types of audio and video streams she supports, along with the associated codecs and network parameters. This offer is then sent to the signaling server, which acts solely as a relay for connection setup information.
 !?[](videos/edrys_05-1.webm)
 
-    --{{2}}--
-The signaling server receives Alice’s offer and forwards it to Bob. This intermediary role is crucial because it allows the initial exchange of connection data even when both parties are behind NATs or firewalls, ensuring that they can communicate the necessary parameters without directly connecting first.
-!?[](videos/edrys_05-2.webm)
-
-    --{{3}}--
-After Bob receives Alice’s offer through the signaling server, he generates an SDP answer that outlines his media capabilities and confirms the proposed connection parameters. This answer provides a mutual understanding of the media exchange, indicating that Bob is ready to establish a connection and detailing his own network settings.
-!?[](videos/edrys_05-3.webm)
-
     {{1}}
 ``` ascii
                (Signaling Server)
@@ -938,6 +932,14 @@ Alice 👩‍💻 <--------'          '--------- 👨🏾‍💻 Bob
       '-- - - - - - - - - - - - - - - - -'
              "{6}{InDirect via TURN}"
 ```
+
+    --{{2}}--
+The signaling server receives Alice’s offer and forwards it to Bob. This intermediary role is crucial because it allows the initial exchange of connection data even when both parties are behind NATs or firewalls, ensuring that they can communicate the necessary parameters without directly connecting first.
+!?[](videos/edrys_05-2.webm)
+
+    --{{3}}--
+After Bob receives Alice’s offer through the signaling server, he generates an SDP answer that outlines his media capabilities and confirms the proposed connection parameters. This answer provides a mutual understanding of the media exchange, indicating that Bob is ready to establish a connection and detailing his own network settings.
+!?[](videos/edrys_05-3.webm)
 
     --{{4}}--
 The signaling server then relays Bob’s SDP answer back to Alice. This step completes the signaling handshake, allowing both peers to possess the required session descriptions that enable them to move forward with establishing a direct connection.
@@ -974,22 +976,21 @@ If WebRTC is blocked entirely, a classroom can use a WebSocket server instead (s
 A _**C**onflict-free **R**eplicated **D**ata **T**ype_ (CRDT) is a new type of data structure[^1] that can be replicated across multiple instances in a network with the following guarantees:
 !?[](videos/edrys_06-0.webm)
 
+    --{{1}}--
+CRDTs allow each replica to be updated independently and concurrently without needing to coordinate with other replicas, meaning that changes can be made even when devices are disconnected or operating in parallel. Any inconsistencies that arise from these independent updates are automatically resolved by the system, ensuring that differences are managed seamlessly. Even though replicas might temporarily have different states, the underlying design guarantees that they will eventually converge to a consistent state once all updates are shared.
+!?[](videos/edrys_06-1.webm)
+
     {{1}}
 1. A replica can be updated independently, concurrently and without coordinating with other replicas.
 2. Inconsistencies can be resolved automatically.
 3. Although replicas may have different state, they are guaranteed to eventually converge.
 
-    --{{1}}--
-CRDTs allow each replica to be updated independently and concurrently without needing to coordinate with other replicas, meaning that changes can be made even when devices are disconnected or operating in parallel. Any inconsistencies that arise from these independent updates are automatically resolved by the system, ensuring that differences are managed seamlessly. Even though replicas might temporarily have different states, the underlying design guarantees that they will eventually converge to a consistent state once all updates are shared.
-!?[](videos/edrys_06-1.webm)
-
-
-      {{2}}
-__Task:__ Implement a distributed counter
-
     --{{2}}--
 The following example is used only as an illustration of the problem that CRDTs solve. In practice, CRDTs are used to implement more complex data structures, such as sets, maps, and lists, that can be replicated across multiple devices in a network.
 !?[](videos/edrys_06-2.webm)
+
+      {{2}}
+__Task:__ Implement a distributed counter
 
     --{{3}}--
 In this distributed counter, both Alice and Bob start with a value of 0. Bob first adds 5 to his counter, and his update is transmitted to Alice so that her counter also reflects a value of 5. Next, Alice increments her counter by 1, raising her local value to 6; however, if this update fails to reach Bob, he remains unaware of the change and retains his previous value of 5. Later, when Bob adds 2 to his counter, his value increases to 7, creating a divergence between the two replicas. The conceptual problem here is that without the reliability and conflict-resolution guarantees provided by CRDTs, lost messages—like Alice’s +1—result in inconsistent states, as the replicas no longer converge on a single, agreed-upon counter value.
@@ -1008,12 +1009,12 @@ Alice 👩‍💻
 Bob 👨🏾‍💻
 ```
 
-    {{4}}
-__Solution:__ Let every replica count its own part...
-
     --{{4}}--
 How can the same problem be solved for a network with messages losses, fluctuating users and no central authority.
 !?[](videos/edrys_06-4.webm)
+
+    {{4}}
+__Solution:__ Let every replica count its own part...
 
     --{{5}}--
 In this CRDT-based approach, every replica only ever changes its own entry: the total of everything it has added itself. Alice starts with (a,0) and Bob with (b,0); Bob's +5 makes his entry (b,5), Alice's +1 makes hers (a,1), and Bob's +2 makes his (b,7).
@@ -1038,7 +1039,7 @@ Bob 👨🏾‍💻
 
 __Implementations__
 
-   --{{6}}--
+    --{{6}}--
 There are several libraries and frameworks that provide CRDT implementations for various data structures, including sets, maps, and lists. We use Yjs, a popular CRDT library that offers shared maps, arrays and text, and that does not depend on a particular network: edrys-lite synchronizes it over WebRTC or WebSocket.
 
 
@@ -1140,6 +1141,9 @@ The Edrys JavaScript client library provides an interface to interact with Edrys
 It includes reactive properties and various functions to manage messaging, updates, and local storage.
 
 #### Properties
+
+    --{{0}}--
+The global `Edrys` object provides the following properties, which tell your module where it runs, who uses it and what the classroom looks like.
 
     {{1}}
 <section>
