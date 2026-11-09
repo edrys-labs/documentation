@@ -107,6 +107,8 @@ A short version of the ID is shown there; the copy button next to it copies the 
 - Your ID is tied to **this browser**. Another browser, another device, or a private window gives you a different ID.
 - Clearing the site data of your browser deletes your ID and the classrooms stored in it. Download a backup of your classrooms first (see [Backup, Restore and Templates](#Backup%2C-Restore-and-Templates)).
 - The same menu also lets you switch the language of the interface and the theme: `Light`, `Dark`, or `System` to follow your device.
+- In the `Display name` field of the menu you can choose the name others see, up to 32 characters. It is saved in this browser and applies in every classroom; clear the field to go back to your short ID. Stations have their own names (see [Opening a Station](#Opening-a-Station)).
+- A display name is not checked and does not have to be unique, so the short ID always stays visible next to it. Your role never depends on your name: someone called "Teacher" is still shown as a student.
 
 </section>
 
@@ -115,7 +117,7 @@ A short version of the ID is shown there; the copy button next to it copies the 
     --{{0}}--
 Visit https://edrys-labs.github.io and click on `Create a class`.
 By the way, the buttons in the footer lead to the project on GitHub, to this documentation and to the blog.
-The menu with the three dots (⋮) in the top right corner holds your User ID, the language and the theme.
+The menu with the three dots (⋮) in the top right corner holds your User ID, your display name, the language and the theme.
 
 ![edrys-lite](images/edrys-page.png)
 
@@ -193,7 +195,9 @@ The number of rooms defines how many numbered rooms (Room 1, Room 2, ...) the cl
 - Raising the number adds the new rooms as soon as you save.
 - Lowering it removes the rooms above the new number. People in a removed room are moved back to the Lobby.
 - A classroom can have up to 50 rooms.
-- The owner can also add a room with the `New room` button at the bottom of the room list.
+- The owner and teachers can also add a room with the `New room` button at the bottom of the room list.
+- The owner and teachers can rename a numbered room with the pencil button that appears when you point at it in the room list, for example `Room 2` to `Group B`. Clear the name to go back to the number. The modules of the room and their content stay as they are.
+- A room name can have up to 40 characters and must be unique. It cannot contain `,` or `*`, and it cannot be `Lobby`, `Station ...` or `Room <number>`.
 
 </section>
 
@@ -304,6 +308,7 @@ Below them, the `As text` field shows the same as a comma separated list, which 
     --{{1}}--
 For example, `lobby, Room 1, Room 2` shows a module in the Lobby and the first two rooms, and `station, station-only` shows it only to the station device, e.g. for a hardware connection that students should not see.
 `teacher-only` and `station-only` have no button; type them into the text field.
+A renamed room matches both its new name and its number, so `Group B` and `Room 2` mean the same room and existing labs keep working. A module that lists a room by a name you later change stops showing there; edrys-lite warns you about this when you rename the room.
 If no module is configured for a room, the room shows a short note instead.
 
 
@@ -431,8 +436,8 @@ Each room has its own state, so different groups can work in different rooms wit
 
 <section>
 
-- **Room list:** Below each room you see who is in it. You are marked with `you`, and teachers and visitors with their role; everyone else is a student. Stations have their own mark.
-- **Chat:** The chat button in the top bar opens the classroom chat. A badge tells you when new messages have arrived. Messages can be formatted with Markdown.
+- **Room list:** Below each room you see who is in it. Someone who chose a display name is shown with it, and their short ID below. Your own row has a colored circle and is marked with `you`, and teachers and visitors with their role; everyone else is a student. Stations have their own mark.
+- **Chat:** The chat button in the top bar opens the classroom chat. A badge tells you when new messages have arrived. Messages can be formatted with Markdown. Each message shows the display name its author had when sending it, next to their short ID.
 - **Full screen:** The button in the top right corner of a module expands it to the whole window; press it again to leave full screen.
 - **Connection:** If your connection to the classroom is lost, a `Reconnecting…` notice appears in the top bar. edrys-lite reconnects by itself.
 
@@ -836,6 +841,7 @@ edrys-lite works without user accounts and without a central server that stores 
 - **No tracking:** There is no sign-up, no password, and no data collection. Classrooms are stored in the browsers of their participants.
 - **Signed changes:** The classroom setup, the rooms, the chat and who is present are signed with the key of their author. Every participant's browser checks these signatures and ignores anything that was not signed by someone allowed to make that change.
 - **Owner check:** The owner part of the classroom link lets a newcomer verify that the setup comes from the real owner.
+- **Display names:** Anyone can choose any display name. To be sure who someone is, go by the short ID and the role shown next to it.
 - **Members list:** Only teachers can change the setup. If you list your students, nobody else can take part (see [Members](#Members)).
 - **Safe content:** Chat messages and descriptions are shown as text, so they cannot run code in other people's browsers. Modules run isolated from the classroom page.
 - **Tutor:** Only if a teacher switches it on, an AI on that teacher's computer answers students' questions. The conversation is encrypted between the student and the teacher's tab, and the teacher can read it (see [The Tutor for Students](#The-Tutor-for-Students)).
@@ -1238,7 +1244,7 @@ This reactive state object represents the overall classroom environment by provi
 
 ```js
 // Users currently present in the classroom, keyed by their ID:
-// { "<id>": { displayName, room, role }, ... }
+// { "<id>": { displayName, username, room, role }, ... }
 console.log(Edrys.liveClass.users);
 // Rooms of the classroom, keyed by room name, each with the shared
 // state of its modules: { "Lobby": { ... }, "Room 1": { ... }, ... }
@@ -1257,13 +1263,15 @@ console.log(Edrys.liveClass.rooms);
 __Reactive object representing the live room state.__
 
     --{{6}}--
-This reactive object holds the shared state of the current room, i.e. everything the modules in this room stored with `Edrys.getState`, as a plain object. It does not contain the room's name; that is `Edrys.liveUser.room`.
+This reactive object holds the shared state of the current room, i.e. everything the modules in this room stored with `Edrys.getState`, as a plain object. It does not contain the room's name; that is `Edrys.liveUser.room`, which stays `Room 2` when a teacher renames the room. To show the room's name to people, use `Edrys.roomLabel`.
 
 ```js
 // Shared state of the current room, keyed by state key
 console.log(Edrys.liveRoom);
-// Name of the current room
+// Name of the current room, for keys and comparisons
 console.log(Edrys.liveUser.room);
+// Name to show for the current room, which teachers can change
+console.log(Edrys.roomLabel);
 ```
 
 ---
@@ -1278,11 +1286,15 @@ console.log(Edrys.liveUser.room);
 __Reactive object representing the live user state.__
 
     --{{7}}--
-This reactive state object stores personalized data about the current user, such as their display name and the room they are occupying. It can be undefined for a moment while the user is joining, so check it before use.
+This reactive state object stores personalized data about the current user, such as their display name and the room they are occupying. It can be undefined for a moment while the user is joining, so check it before use. To identify a user, for example as a key in stored data, use `Edrys.username`, not a name.
 
 ```js
-// User's display name
+// User's short ID, or a station's name
 console.log(Edrys.liveUser?.displayName);
+// The name the user chose, or null; not unique, and it can change at any time
+console.log(Edrys.liveUser?.username);
+// What to show to people
+console.log(Edrys.liveUser?.username || Edrys.liveUser?.displayName);
 // User's current room
 console.log(Edrys.liveUser?.room);
 // User's role: "teacher", "student" or "station"
@@ -1566,7 +1578,7 @@ Edrys.onReady(() => {
   const awareness = Edrys.getState("code", "Awareness");
 
   awareness.setLocalStateField("user", {
-    name: Edrys.liveUser?.displayName,
+    name: Edrys.liveUser?.username || Edrys.liveUser?.displayName,
     color: "#ff8800",
   });
 
@@ -1898,7 +1910,7 @@ main: |-
   Edrys.onReady(() => {
     const greeting = Edrys.module.config?.greeting || "Hello"
     document.getElementById("greeting").textContent =
-      `${greeting}, ${Edrys.liveUser?.displayName}!`
+      `${greeting}, ${Edrys.liveUser?.username || Edrys.liveUser?.displayName}!`
   })
 ```
 
