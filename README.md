@@ -201,6 +201,21 @@ The number of rooms defines how many numbered rooms (Room 1, Room 2, ...) the cl
 
 </section>
 
+    --{{0}}--
+With `Only teachers can move students`, students no longer choose their room themselves: they start in the Lobby and go to a room or a station only when a teacher sends them there.
+They still see all rooms and who is in them.
+
+<section>
+
+- To move a student, click the move button at the end of their row in the room list and choose the room or station. The room they are in now is marked `Here now`.
+- To move several students at once, click `Select` next to `New room`, tick the students, and choose the room under `Move to…`. Each room shows how many of them are already there.
+- A moved student gets a short notice, and the room list tells them that their teacher moves them between rooms.
+- Turning the setting on during a class leaves everyone where they are; it only stops students from changing rooms. Turning it off lets them move freely again.
+- A student who reloads the page starts in the Lobby again.
+- The setting organizes a class; it is not a security boundary like for an exam. Everybody's browser still receives the whole classroom.
+
+</section>
+
 ### Members
 
     --{{0}}--
@@ -336,6 +351,7 @@ meta:
   logo: url of the lab logo
   description: description of the lab
   defaultNumberOfRooms: number of rooms
+  teacherMovesStudents: true if only teachers move students between rooms
 modules:
   - url: url of the module
     config: available for everyone
@@ -429,6 +445,7 @@ If you tick `Keep the settings in the address bar`, your own address bar shows t
     --{{0}}--
 Once you have joined a classroom, the rooms menu (☰, or the room name in the top bar) lists its rooms and who is in them.
 Click on a room to move there. Everyone starts in the Lobby. Each room has its own color and letter, which also mark it in the top bar and in the settings.
+In a classroom where only teachers move students, the rooms cannot be clicked: a line under the class name says so, and a short notice tells you when your teacher has moved you.
 
     --{{0}}--
 The modules of a room are shared by everyone in it: if one student types into an editor, the others see it right away, together with each other's cursors.
@@ -464,7 +481,7 @@ Below the link, `Connected stations` lists the stations that are open right now,
 ![Station](images/station-settings.png)
 
     --{{0}}--
-The station appears as a separate room in the classroom, and students can interact with it by clicking on the room.
+The station appears as a separate room in the classroom, and students can interact with it by clicking on the room (or, if only teachers move students, once a teacher sends them there).
 On the station itself, a `Station Mode Active` box shows its name. Type a new name and press the arrow button to rename it; `Exit Station Mode` opens the normal classroom link instead.
 Every station also has its own user, which is shown in the room list. Changing the station name also changes this user name.
 You can open multiple stations in parallel on different devices to make several hardware resources available.
