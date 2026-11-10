@@ -481,16 +481,17 @@ Below the link, `Connected stations` lists the stations that are open right now,
 ![Station](images/station-settings.png)
 
     --{{0}}--
-The station appears as a separate room in the classroom, and students can interact with it by clicking on the room (or, if only teachers move students, once a teacher sends them there).
+The station appears as a separate room in the classroom, listed under `Stations` below the other rooms, and students can interact with it by clicking on the room (or, if only teachers move students, once a teacher sends them there).
+The room shows the station's name and whether it is `Online`.
 On the station itself, a `Station Mode Active` box shows its name. Type a new name and press the arrow button to rename it; `Exit Station Mode` opens the normal classroom link instead.
-Every station also has its own user, which is shown in the room list. Changing the station name also changes this user name.
+Renaming the station also renames its room.
 You can open multiple stations in parallel on different devices to make several hardware resources available.
 
 ![Station](images/stations.png)
 
     --{{0}}--
 A station keeps working while its tab is in the background, so the device can be used for other things in the meantime.
-When the station tab is closed, its room disappears from the classroom after a few seconds and the students in it are moved back to the Lobby.
+When the station tab is closed, its room disappears from the classroom. The students in it see `Reconnecting…` for a few seconds and are then moved back to the Lobby.
 If the station only reloads, it comes back in the same room and the students stay.
 
 ### Example: Arduino Remote Lab
