@@ -75,7 +75,7 @@ All you need is a modern browser and the link to a classroom.
 - Classrooms are made of _modules_: editors, terminals, camera streams, task descriptions, ...
 - Remote hardware (e.g. an Arduino) can be shared with students through _stations_
 
-!?[YouTube Demo](https://www.youtube.com/watch?v=6ZjGHorc2ds)
+!?[edrys-Lite tutorial: remote Arduino lab](https://www.youtube.com/watch?v=SSuDf0Idthk)
 
 ### Roles
 
